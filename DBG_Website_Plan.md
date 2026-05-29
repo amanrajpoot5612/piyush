@@ -1,4 +1,5 @@
 # Digital Brands Growth — Website Design Plan
+
 ## Complete Blueprint for a Stunning Agency Portfolio Website
 
 ---
@@ -7,7 +8,7 @@
 
 **Brand:** Digital Brands Growth (DBG)  
 **Founder:** Piyush Vashisht  
-**Tagline:** *We Don't Just Market Brands — We Build Growth.*  
+**Tagline:** _We Don't Just Market Brands — We Build Growth._  
 **Website Goal:** A high-converting, visually dominant single-page portfolio website that positions DBG as a premium digital marketing agency for startups, local businesses, and growing brands.  
 **Inspiration Reference:** [rapiddigitalgrowth.com](https://www.rapiddigitalgrowth.com)  
 **Primary CTA:** Lead generation (contact form + WhatsApp/phone button)
@@ -17,27 +18,35 @@
 ## 2. Brand Identity & Color System
 
 ### Primary Palette (from DBG brand materials)
+
 ```css
---color-primary:       #00B4D8;   /* Electric Cyan — main accent */
---color-primary-dark:  #0077B6;   /* Deep Blue — secondary accent */
---color-bg-dark:       #0A0E1A;   /* Near-black navy — hero/dark sections */
---color-bg-mid:        #0D1526;   /* Dark navy — card backgrounds */
---color-bg-light:      #F0F6FF;   /* Off-white — light sections */
---color-white:         #FFFFFF;
---color-text-body:     #C8D6E5;   /* Light grey-blue on dark bg */
---color-text-muted:    #7A90A8;   /* Muted for captions */
---color-gradient-1:    linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
---color-gradient-hero: linear-gradient(160deg, #0A0E1A 0%, #0D2137 60%, #0A0E1A 100%);
+--color-primary: #00b4d8; /* Electric Cyan — main accent */
+--color-primary-dark: #0077b6; /* Deep Blue — secondary accent */
+--color-bg-dark: #0a0e1a; /* Near-black navy — hero/dark sections */
+--color-bg-mid: #0d1526; /* Dark navy — card backgrounds */
+--color-bg-light: #f0f6ff; /* Off-white — light sections */
+--color-white: #ffffff;
+--color-text-body: #c8d6e5; /* Light grey-blue on dark bg */
+--color-text-muted: #7a90a8; /* Muted for captions */
+--color-gradient-1: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+--color-gradient-hero: linear-gradient(
+  160deg,
+  #0a0e1a 0%,
+  #0d2137 60%,
+  #0a0e1a 100%
+);
 ```
 
 ### Accent & UI Colors
+
 ```css
---color-success:   #00F5A0;   /* Neon green — for metrics/stats */
---color-card-glow: rgba(0, 180, 216, 0.12);  /* Glow on hover */
---color-border:    rgba(0, 180, 216, 0.2);
+--color-success: #00f5a0; /* Neon green — for metrics/stats */
+--color-card-glow: rgba(0, 180, 216, 0.12); /* Glow on hover */
+--color-border: rgba(0, 180, 216, 0.2);
 ```
 
 ### Usage Rules
+
 - Dark sections (Hero, Why Choose, CTA): `--color-bg-dark` background
 - Light sections (Services detail, About, Testimonials): `--color-bg-light`
 - Accent borders and highlights: always `--color-primary`
@@ -49,6 +58,7 @@
 ## 3. Typography System
 
 ### Font Pairing
+
 ```
 Display / Hero Headings:  "Syne" (Google Fonts) — Bold, geometric, modern-agency feel
 Sub-headings / Sections:  "Syne" SemiBold
@@ -57,17 +67,18 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ```
 
 ### Scale
+
 ```css
---text-hero:    clamp(3.2rem, 7vw, 6rem);    /* Main headline */
---text-h2:      clamp(2rem, 4vw, 3.2rem);    /* Section titles */
---text-h3:      clamp(1.4rem, 2.5vw, 2rem);  /* Card titles */
---text-body:    clamp(1rem, 1.5vw, 1.15rem); /* Paragraphs */
---text-small:   0.875rem;                    /* Captions, labels */
---text-label:   0.75rem;                     /* Eyebrow labels (uppercase) */
+--text-hero: clamp(3.2rem, 7vw, 6rem); /* Main headline */
+--text-h2: clamp(2rem, 4vw, 3.2rem); /* Section titles */
+--text-h3: clamp(1.4rem, 2.5vw, 2rem); /* Card titles */
+--text-body: clamp(1rem, 1.5vw, 1.15rem); /* Paragraphs */
+--text-small: 0.875rem; /* Captions, labels */
+--text-label: 0.75rem; /* Eyebrow labels (uppercase) */
 
 --line-height-heading: 1.1;
---line-height-body:    1.7;
---letter-spacing-label: 0.12em;  /* For "OUR SERVICES", eyebrows */
+--line-height-body: 1.7;
+--letter-spacing-label: 0.12em; /* For "OUR SERVICES", eyebrows */
 ```
 
 ---
@@ -75,16 +86,17 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ## 4. Spacing & Layout
 
 ```css
---section-padding-y:   clamp(5rem, 10vh, 8rem);
---section-padding-x:   clamp(1.5rem, 6vw, 8rem);
+--section-padding-y: clamp(5rem, 10vh, 8rem);
+--section-padding-x: clamp(1.5rem, 6vw, 8rem);
 --container-max-width: 1280px;
---grid-gap:            2rem;
---card-radius:         1rem;
---card-padding:        2rem;
---border-radius-pill:  9999px;   /* For tags, badges */
+--grid-gap: 2rem;
+--card-radius: 1rem;
+--card-padding: 2rem;
+--border-radius-pill: 9999px; /* For tags, badges */
 ```
 
 ### Layout Principles
+
 - Sticky top navbar (glass morphism on scroll)
 - Max width container of 1280px, centered
 - Section alternation: full-bleed dark → contained light → full-bleed dark
@@ -124,6 +136,7 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ---
 
 ### 6.1 Navigation
+
 - **Style:** Fixed top, transparent → frosted-glass on scroll (`backdrop-filter: blur(16px)` + dark overlay)
 - **Logo:** DBG logo SVG, left-aligned
 - **Links:** Home · Services (dropdown) · About · Why DBG · Contact
@@ -134,6 +147,7 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ---
 
 ### 6.2 Hero Section
+
 - **Background:** Dark navy (`--color-bg-dark`) with animated mesh gradient and subtle grid lines (CSS)
 - **Floating particles or grid-dot pattern** using CSS `radial-gradient` background pattern
 - **Layout:** Split — Left (60%) headline + CTAs, Right (40%) mock dashboard/laptop mockup (recreated as CSS/HTML visual like the one in the PPT)
@@ -150,6 +164,7 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ---
 
 ### 6.3 Stats Strip
+
 - **Background:** Solid `--color-primary` or gradient strip between hero and about
 - **Layout:** 4 columns, full-width
 - **Stats (placeholder, update with real data):**
@@ -163,6 +178,7 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ---
 
 ### 6.4 About / Founder Section
+
 - **Background:** `--color-bg-light` (off-white)
 - **Layout:** 2-column — Left: founder photo (styled with cyan accent border/frame), Right: text
 - **Content:**
@@ -170,13 +186,14 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
   - H2: `Hi, I'm Piyush Vashisht`
   - Subtitle: `Founder & CEO — Digital Brands Growth`
   - 4 icon bullet points (from PPT) with concise text each
-  - Signature image below name (script-style text: *Piyush Vashisht*)
+  - Signature image below name (script-style text: _Piyush Vashisht_)
 - **Photo treatment:** Circular or rounded-rectangle, with a glowing cyan border animation
 - **Accent:** Small decorative element — a floating metric badge near photo showing e.g. "₹2.45M Revenue Generated"
 
 ---
 
 ### 6.5 Mission & Vision Section
+
 - **Background:** Dark (`--color-bg-dark`)
 - **Layout:** 2 cards side by side — Mission (outlined border, dark) | Vision (filled gradient)
 - **Content:** Directly from PPT — 5 mission points, 5 vision points
@@ -186,6 +203,7 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ---
 
 ### 6.6 Services Overview Grid
+
 - **Background:** `--color-bg-light`
 - **Eyebrow:** `WHAT WE DO`
 - **H2:** `Our Complete Service Portfolio`
@@ -204,9 +222,11 @@ Monospace / Stats:        "Space Mono" — For counters, metrics, technical data
 ---
 
 ### 6.7 Individual Service Deep-Dive Sections
+
 Each service gets a dedicated alternating section (dark/light), matching the detailed PPT slides.
 
 **Template per service:**
+
 - **Tag:** Service abbreviation badge (e.g., "SEO")
 - **H2:** Service full name
 - **Tagline:** One-liner from PPT
@@ -215,6 +235,7 @@ Each service gets a dedicated alternating section (dark/light), matching the det
 - **Visual:** Decorative element — icon grid, arrow flow diagram, or abstract shape
 
 **Order:**
+
 1. SEO — Dark bg, "What We Offer" + "Results" layout
 2. SMO — Light bg, platform icons grid (Instagram, Facebook, LinkedIn, Twitter, YouTube)
 3. SMM — Dark bg, 5-campaign pentagon/grid
@@ -226,6 +247,7 @@ Each service gets a dedicated alternating section (dark/light), matching the det
 ---
 
 ### 6.8 Why Choose DBG Section
+
 - **Background:** Dark (`--color-bg-dark`) with subtle radial gradient spotlight
 - **H2:** `Why Choose Digital Brands Growth?`
 - **Layout:** 5 feature cards in a staggered or W-shaped grid
@@ -236,11 +258,12 @@ Each service gets a dedicated alternating section (dark/light), matching the det
   4. Business Growth — Customized growth plans
   5. WFH Model — Remote = lower costs passed to clients
 - **Card style:** Outlined border cards with number badge, icon, title, description
-- **Differentiator callout:** Full-width highlighted quote block — *"By working remotely, we save on overhead — so you get more value for every rupee."*
+- **Differentiator callout:** Full-width highlighted quote block — _"By working remotely, we save on overhead — so you get more value for every rupee."_
 
 ---
 
 ### 6.9 Testimonials Section (Placeholder)
+
 - **Background:** `--color-bg-light`
 - **H2:** `What Our Clients Say`
 - **Layout:** 3-column card carousel (CSS scroll snap on mobile)
@@ -251,6 +274,7 @@ Each service gets a dedicated alternating section (dark/light), matching the det
 ---
 
 ### 6.10 Contact Section
+
 - **Background:** Dark (`--color-bg-dark`), full-width
 - **H2:** `Let's Build Your Growth Story`
 - **Subtext:** CTA line encouraging enquiry
@@ -266,6 +290,7 @@ Each service gets a dedicated alternating section (dark/light), matching the det
 ---
 
 ### 6.11 Footer
+
 - **Background:** Deepest dark (`#060A12`)
 - **Layout:** 4-column grid
   - Col 1: Logo + tagline + social icons (Instagram, Facebook, LinkedIn, Twitter, YouTube)
@@ -280,23 +305,27 @@ Each service gets a dedicated alternating section (dark/light), matching the det
 ## 7. Motion & Animation Plan
 
 ### Page Load
+
 - Navigation: fade + slide down (0.3s)
 - Hero headline: word-by-word stagger reveal (0.6s total, 0.08s delay per word)
 - Hero dashboard: slide up + fade (0.8s, 0.3s delay)
 - Stats numbers: count up on first scroll into view
 
 ### Scroll Animations
+
 - All sections: fade-up + slight translateY (triggered via IntersectionObserver)
 - Service cards: stagger in left-to-right (0.1s delay between cards)
 - Stats counter: JS IntersectionObserver, smooth countUp()
 
 ### Hover States
+
 - Nav links: sliding underline (cyan, width 0→100%)
 - Service cards: translateY(-8px), box-shadow glow
 - CTA buttons: scale(1.03), shadow intensifies
 - Social icons: fill-in color transition (0.2s)
 
 ### Cursor (optional — desktop only)
+
 - Custom cursor: small cyan dot + larger outline circle that lags behind
 - On hover of buttons: cursor expands, changes color
 
@@ -324,15 +353,18 @@ components/
 ## 9. Tech Stack Recommendation
 
 ### Option A — Pure HTML/CSS/JS (Simplest, fastest to ship)
+
 ```
 index.html          — Single file
 /css/style.css      — All styles, CSS custom properties
 /js/main.js         — Scroll animations, counter, mobile nav, smooth scroll
 /assets/            — Logo, images, icons
 ```
+
 **Best for:** Quick launch, easy hosting on any platform
 
 ### Option B — React + Vite (Scalable, component-based)
+
 ```
 src/
 ├── components/     — Individual section components
@@ -340,11 +372,13 @@ src/
 ├── assets/
 └── App.jsx         — Single-page layout
 ```
+
 **Best for:** Future blog, service pages, CMS integration
 
 ### Recommended: **Option A first** → migrate to Option B when scaling
 
 ### Hosting Suggestions
+
 - Netlify (free tier, great for static sites)
 - Vercel (free, instant deploy from GitHub)
 - Custom domain: digitalbrandsgrowth.com (already branded)
@@ -355,13 +389,22 @@ src/
 
 ```css
 /* Mobile first */
-@media (min-width: 480px)  { /* Large phone  */ }
-@media (min-width: 768px)  { /* Tablet       */ }
-@media (min-width: 1024px) { /* Desktop      */ }
-@media (min-width: 1280px) { /* Large desktop */ }
+@media (min-width: 480px) {
+  /* Large phone  */
+}
+@media (min-width: 768px) {
+  /* Tablet       */
+}
+@media (min-width: 1024px) {
+  /* Desktop      */
+}
+@media (min-width: 1280px) {
+  /* Large desktop */
+}
 ```
 
 ### Responsive Behavior
+
 - Hero: stacks vertically on mobile (headline on top, dashboard below)
 - Nav: hamburger menu on < 1024px
 - Service grid: 1 col (mobile) → 2 col (tablet) → 4 col (desktop)
@@ -374,14 +417,22 @@ src/
 ## 11. SEO & Performance Plan
 
 ### Meta Tags
+
 ```html
 <title>Digital Brands Growth | We Build Growth | Delhi, India</title>
-<meta name="description" content="Digital Brands Growth is a creative digital marketing agency offering SEO, Social Media, Google Ads, and Website Design to help brands grow.">
-<meta property="og:title" content="Digital Brands Growth — Building Brands That Dominate">
-<meta property="og:image" content="/assets/og-image.jpg">
+<meta
+  name="description"
+  content="Digital Brands Growth is a creative digital marketing agency offering SEO, Social Media, Google Ads, and Website Design to help brands grow."
+/>
+<meta
+  property="og:title"
+  content="Digital Brands Growth — Building Brands That Dominate"
+/>
+<meta property="og:image" content="/assets/og-image.jpg" />
 ```
 
 ### Performance
+
 - Lazy load all images below the fold
 - Minify CSS + JS for production
 - Use WebP format for all images
@@ -389,6 +440,7 @@ src/
 - Target Lighthouse score: 90+ Performance, 90+ Accessibility
 
 ### Local SEO
+
 - Include "Delhi", "India" in meta and footer copy
 - Add Google Maps embed (optional) or address in footer
 - Schema markup: `LocalBusiness` JSON-LD in `<head>`
@@ -481,5 +533,5 @@ These elements will make the site feel premium, not generic:
 
 ---
 
-*Plan Version 1.0 — Prepared for Digital Brands Growth by Claude*  
-*Inspired by: rapiddigitalgrowth.com | Brand Source: DBG Portfolio PPT*
+_Plan Version 1.0 — Prepared for Digital Brands Growth by Claude_  
+_Inspired by: rapiddigitalgrowth.com | Brand Source: DBG Portfolio PPT_
