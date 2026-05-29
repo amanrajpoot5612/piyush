@@ -1,55 +1,67 @@
 /* Phase 2 design tokens — light-first */
-:root{
+:root {
   /* Backgrounds */
-  --bg-base: #FFFFFF;
-  --bg-soft: #F5F8FF;
-  --bg-accent-light: #EBF4FF;
-  --bg-dark-hero: #050D1F;
+  --bg-base: #ffffff;
+  --bg-soft: #f5f8ff;
+  --bg-accent-light: #ebf4ff;
+  --bg-dark-hero: #050d1f;
   --bg-dark-cta: #071428;
-  --bg-navy-card: #0A1E3D;
+  --bg-navy-card: #0a1e3d;
 
   /* Brand */
-  --cyan: #00B4D8;
-  --cyan-light: #48CAE4;
-  --cyan-glow: rgba(0,180,216,0.15);
-  --navy: #0A1E3D;
-  --navy-soft: #1A3558;
+  --cyan: #00b4d8;
+  --cyan-light: #48cae4;
+  --cyan-glow: rgba(0, 180, 216, 0.15);
+  --navy: #0a1e3d;
+  --navy-soft: #1a3558;
 
   /* Text */
-  --text-primary: #0A1E3D;
-  --text-secondary: #3D5A80;
-  --text-body: #5A728A;
-  --text-muted: #8FA8C0;
-  --text-on-dark: #FFFFFF;
-  --text-on-dark-sub: #9BB8D4;
+  --text-primary: #0a1e3d;
+  --text-secondary: #3d5a80;
+  --text-body: #5a728a;
+  --text-muted: #8fa8c0;
+  --text-on-dark: #ffffff;
+  --text-on-dark-sub: #9bb8d4;
 
   /* UI */
-  --success: #00C896;
-  --border-light: rgba(10,30,61,0.08);
-  --border-cyan: rgba(0,180,216,0.3);
-  --shadow-card: 0 4px 24px rgba(10,30,61,0.08);
-  --shadow-card-hover: 0 12px 40px rgba(0,180,216,0.18);
-  --shadow-hero: 0 24px 64px rgba(0,180,216,0.25);
+  --success: #00c896;
+  --border-light: rgba(10, 30, 61, 0.08);
+  --border-cyan: rgba(0, 180, 216, 0.3);
+  --shadow-card: 0 4px 24px rgba(10, 30, 61, 0.08);
+  --shadow-card-hover: 0 12px 40px rgba(0, 180, 216, 0.18);
+  --shadow-hero: 0 24px 64px rgba(0, 180, 216, 0.25);
 
   /* Gradients */
-  --gradient-brand: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
-  --gradient-hero-bg: radial-gradient(ellipse at 30% 50%, #0D2137 0%, #050D1F 70%);
-  --gradient-section: linear-gradient(180deg, #F5F8FF 0%, #FFFFFF 100%);
+  --gradient-brand: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+  --gradient-hero-bg: radial-gradient(
+    ellipse at 30% 50%,
+    #0d2137 0%,
+    #050d1f 70%
+  );
+  --gradient-section: linear-gradient(180deg, #f5f8ff 0%, #ffffff 100%);
 
   /* Type scale */
-  --text-hero: clamp(2.6rem,8vw,5.5rem);
-  --text-h2: clamp(1.9rem,5vw,3rem);
-  --text-h3: clamp(1.3rem,3vw,1.8rem);
-  --text-body-lg: clamp(1rem,2vw,1.15rem);
-  --text-body: clamp(0.9rem,1.5vw,1rem);
+  --text-hero: clamp(2.6rem, 8vw, 5.5rem);
+  --text-h2: clamp(1.9rem, 5vw, 3rem);
+  --text-h3: clamp(1.3rem, 3vw, 1.8rem);
+  --text-body-lg: clamp(1rem, 2vw, 1.15rem);
+  --text-body: clamp(0.9rem, 1.5vw, 1rem);
   --text-small: 0.8125rem;
 
   /* Spacing */
-  --sp-1: 0.25rem; --sp-2: 0.5rem; --sp-3: 0.75rem; --sp-4: 1rem; --sp-6: 1.5rem; --sp-8: 2rem;
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
   --container-max: 1260px;
   --card-radius: 1rem;
 }
 
-@media (prefers-reduced-motion: reduce){
-  *{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
