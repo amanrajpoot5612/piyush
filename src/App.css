@@ -131,7 +131,10 @@ body {
 .button-secondary {
   background: transparent;
   border: 1px solid var(--color-primary);
-  color: var(--navy);
+  color: var(--color-primary);
+}
+.button-secondary:hover {
+  background: rgba(0, 180, 216, 0.1);
 }
 
 .button-outline {
@@ -285,16 +288,16 @@ body {
   background:
     radial-gradient(
       circle at 20% 20%,
-      rgba(0, 180, 216, 0.18),
-      transparent 25%
+      rgba(0, 180, 216, 0.12),
+      transparent 28%
     ),
     radial-gradient(
-      circle at 80% 10%,
-      rgba(72, 202, 228, 0.16),
-      transparent 20%
+      circle at 85% 12%,
+      rgba(72, 202, 228, 0.14),
+      transparent 22%
     ),
-    linear-gradient(180deg, #071428 0%, #050d1f 100%);
-  color: #ffffff;
+    linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+  color: var(--text-primary);
 }
 
 .hero-section::after {
@@ -303,8 +306,8 @@ body {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(5, 13, 31, 0.88),
-    rgba(5, 13, 31, 0.82)
+    rgba(255, 255, 255, 0.92),
+    rgba(255, 255, 255, 0.98)
   );
   pointer-events: none;
 }
@@ -331,9 +334,24 @@ body {
 .hero-description {
   max-width: 36rem;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--color-text-body);
   font-size: 1rem;
   line-height: 1.8;
+}
+
+.hero-copy,
+.hero-actions {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s ease;
+}
+
+.page-shell.loaded .hero-copy,
+.page-shell.loaded .hero-actions {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-actions {
@@ -352,8 +370,19 @@ body {
 .hero-badges div {
   padding: 1rem 1.25rem;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border: 1px solid rgba(36, 59, 90, 0.08);
+  box-shadow: 0 16px 28px rgba(36, 59, 90, 0.06);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.page-shell.loaded .hero-badges div {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-badges strong {
@@ -363,16 +392,26 @@ body {
 }
 
 .hero-badges span {
-  color: rgba(255, 255, 255, 0.74);
+  color: var(--color-text-body);
 }
 
 .hero-panel {
   position: relative;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border: 1px solid rgba(36, 59, 90, 0.08);
   border-radius: 28px;
   padding: 2.2rem;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 20px 60px rgba(36, 59, 90, 0.08);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.page-shell.loaded .hero-panel {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-panel h2 {
@@ -381,7 +420,7 @@ body {
 }
 
 .hero-panel p {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--color-text-body);
   line-height: 1.75;
 }
 
@@ -396,7 +435,7 @@ body {
 .hero-panel-list li {
   padding-left: 1.4rem;
   position: relative;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--text-primary);
 }
 
 .hero-panel-list li::before {
@@ -412,6 +451,36 @@ body {
   letter-spacing: 0.18em;
   color: var(--color-primary);
   font-size: 0.8rem;
+}
+
+.hero-copy,
+.hero-actions,
+.hero-badges {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.page-shell.loaded .hero-copy,
+.page-shell.loaded .hero-actions,
+.page-shell.loaded .hero-badges {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.hero-badges {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 }
 
 .section-header {
@@ -513,6 +582,12 @@ body {
   border-radius: 28px;
   padding: 2rem;
   box-shadow: 0 16px 32px rgba(10, 30, 61, 0.06);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .service-card h3,
@@ -551,6 +626,14 @@ body {
   left: 0;
   color: var(--color-primary);
 }
+.package-card li::before {
+  content: "✓";
+  font-weight: 700;
+}
+.package-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(10, 30, 61, 0.12);
+}
 
 .service-link {
   display: inline-flex;
@@ -561,7 +644,7 @@ body {
 
 .packages-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 

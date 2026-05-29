@@ -107,9 +107,11 @@ const packageCards = [
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [businessOpen, setBusinessOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
+    setLoaded(true);
     const reveal = () => {
       document.querySelectorAll(".reveal-on-scroll").forEach((element) => {
         const rect = element.getBoundingClientRect();
@@ -125,7 +127,7 @@ function App() {
   }, []);
 
   return (
-    <div className="page-shell">
+    <div className={`page-shell${loaded ? " loaded" : ""}`}>
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#home">
