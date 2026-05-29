@@ -1,0 +1,10 @@
+/* Buttons, badges, icons — Phase 2 */
+.button-primary{
+  background:var(--gradient-brand);
+  color:var(--bg-dark-hero);
+  border-radius:9999px;padding:0.875rem 1.6rem;font-weight:700;display:inline-flex;align-items:center;gap:0.5rem;border:0;box-shadow:0 8px 30px rgba(0,180,216,0.18)
+}
+.button-secondary{background:transparent;border:2px solid var(--cyan);color:var(--navy);border-radius:9999px;padding:0.75rem 1.4rem;font-weight:600}
+.eyebrow{display:inline-flex;align-items:center;gap:0.5rem}
+.service-icon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--gradient-brand);color:white}
+.metric-badge{position:absolute;bottom:-1rem;right:-1rem;background:var(--bg-base);border-radius:1rem;padding:0.6rem 1rem;box-shadow:var(--shadow-card);border:1px solid var(--border-cyan);display:flex;align-items:center;gap:0.5rem}
