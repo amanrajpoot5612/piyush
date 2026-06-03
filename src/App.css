@@ -419,6 +419,84 @@ body {
   font-size: clamp(2rem, 4vw, 2.6rem);
 }
 
+/* Hero video styles */
+.hero-video-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-player {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(10, 30, 61, 0.08);
+}
+
+/* Carousel styles */
+.service-carousel {
+  margin: 1.25rem 0 2rem;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.45s ease;
+  width: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.carousel-controls button {
+  background: transparent;
+  border: 1px solid rgba(36, 59, 90, 0.06);
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(36, 59, 90, 0.12);
+  border: none;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--color-primary);
+}
+
+/* tweak buttons and spacing */
+.button-primary {
+  padding: 0.85rem 1.6rem;
+}
+
+.button-secondary {
+  padding: 0.7rem 1.2rem;
+  border-radius: 9999px;
+}
+
 .hero-panel p {
   color: var(--color-text-body);
   line-height: 1.75;
@@ -443,6 +521,70 @@ body {
   position: absolute;
   left: 0;
   color: var(--color-primary);
+}
+
+/* Why Choose Us section */
+.why-choose .section-header {
+  text-align: left;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.why-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.why-features .feature {
+  background: #ffffff;
+  border: 1px solid rgba(36, 59, 90, 0.06);
+  padding: 1.15rem;
+  border-radius: 12px;
+}
+
+.why-features h4 {
+  margin: 0 0 0.5rem;
+  color: var(--navy);
+}
+
+.why-copy h3 {
+  margin-top: 0;
+}
+
+/* Service image card */
+.service-image-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(36, 59, 90, 0.06);
+  box-shadow: 0 12px 28px rgba(10, 30, 61, 0.06);
+}
+
+.service-image-wrap img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.service-image-body {
+  padding: 1rem 1.2rem;
+}
+
+@media (max-width: 980px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-features {
+    grid-template-columns: 1fr;
+  }
 }
 
 .panel-label {

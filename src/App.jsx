@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import ServiceCarousel from "./components/ServiceCarousel";
+import WhyChooseUsSection from "./components/WhyChooseUsSection";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -35,6 +37,7 @@ const serviceItems = [
       "Fast loading performance",
       "Clean visual storytelling",
     ],
+    image: "/images/services/service-1.jpg",
   },
   {
     title: "SEO Optimization",
@@ -46,6 +49,7 @@ const serviceItems = [
       "On-page and off-page strategies",
       "Sustainable organic growth",
     ],
+    image: "/images/services/service-2.jpg",
   },
   {
     title: "Social Media Marketing",
@@ -57,6 +61,7 @@ const serviceItems = [
       "Community management",
       "Paid and organic growth",
     ],
+    image: "/images/services/service-3.jpg",
   },
   {
     title: "Paid Ads Promotion",
@@ -68,6 +73,7 @@ const serviceItems = [
       "Creative testing",
       "Performance optimization",
     ],
+    image: "/images/services/service-4.jpg",
   },
 ];
 
@@ -75,6 +81,7 @@ const packageCards = [
   {
     title: "Website Packages",
     subtitle: "Smart websites for fast-growing brands.",
+    icon: "🖥️",
     items: [
       "Custom design & development",
       "CMS integration",
@@ -85,6 +92,7 @@ const packageCards = [
   {
     title: "SEO Packages",
     subtitle: "Search growth packages for local and national brands.",
+    icon: "📈",
     items: [
       "Keyword research",
       "Technical SEO audit",
@@ -95,6 +103,7 @@ const packageCards = [
   {
     title: "Growth Packages",
     subtitle: "Integrated campaigns that turn clicks into revenue.",
+    icon: "🚀",
     items: [
       "Social media planning",
       "Paid ads management",
@@ -104,35 +113,54 @@ const packageCards = [
   },
 ];
 
+const stats = [
+  { value: "50+", label: "Happy Clients" },
+  { value: "70%", label: "Average ROI" },
+  { value: "8+", label: "Years Experience" },
+  { value: "4x", label: "Avg Traffic Growth" },
+];
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [businessOpen, setBusinessOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [videoAutoplay, setVideoAutoplay] = useState(false);
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     setLoaded(true);
+
+    const setVideoPreference = () => {
+      setVideoAutoplay(window.innerWidth >= 900);
+    };
+    setVideoPreference();
+    window.addEventListener("resize", setVideoPreference);
+
     const reveal = () => {
-      document.querySelectorAll(".reveal-on-scroll").forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 120) {
-          element.classList.add("revealed");
+      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+          el.classList.add("revealed");
         }
       });
     };
-
     reveal();
     window.addEventListener("scroll", reveal, { passive: true });
-    return () => window.removeEventListener("scroll", reveal);
+
+    return () => {
+      window.removeEventListener("resize", setVideoPreference);
+      window.removeEventListener("scroll", reveal);
+    };
   }, []);
 
   return (
     <div className={`page-shell${loaded ? " loaded" : ""}`}>
+
+      {/* ── HEADER ── */}
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#home">
-            <span>DBG</span>
-            <strong>Digital Brands Growth</strong>
+            <span className="brand-mark">DBG</span>
+            <strong className="brand-name">Digital Brands Growth</strong>
           </a>
 
           <nav className="desktop-nav" aria-label="Primary navigation">
@@ -151,48 +179,36 @@ function App() {
           <div className="header-actions">
             <button
               type="button"
-              className="button button-secondary"
-              onClick={() => {
-                setBusinessOpen(true);
-                setMenuOpen(false);
-              }}
+              className="btn btn-ghost"
+              onClick={() => { setBusinessOpen(true); setMenuOpen(false); }}
             >
-              Business
+              Industries
             </button>
+            <a className="btn btn-primary" href="#contact">Let's Talk</a>
             <button
               type="button"
               className={`menu-toggle ${menuOpen ? "open" : ""}`}
-              aria-label="Open menu"
-              onClick={() => setMenuOpen((open) => !open)}
+              aria-label="Toggle menu"
+              onClick={() => setMenuOpen((o) => !o)}
             >
-              <span />
-              <span />
-              <span />
+              <span /><span /><span />
             </button>
           </div>
         </div>
       </header>
 
+      {/* ── MOBILE MENU ── */}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <div className="mobile-menu-top">
-          <button
-            type="button"
-            className="button button-secondary"
-            onClick={() => {
-              setBusinessOpen(true);
-              setMenuOpen(false);
-            }}
-          >
-            Business
-          </button>
+          <a className="brand" href="#home">
+            <span className="brand-mark">DBG</span>
+          </a>
           <button
             type="button"
             className="icon-button"
             aria-label="Close menu"
             onClick={() => setMenuOpen(false)}
-          >
-            ×
-          </button>
+          >×</button>
         </div>
         <nav className="mobile-links">
           {navLinks.map((item) => (
@@ -207,108 +223,199 @@ function App() {
             </a>
           ))}
         </nav>
-        <a className="button button-primary mobile-cta" href="#contact">
-          Let’s Talk
-        </a>
+        <div className="mobile-menu-footer">
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={() => { setBusinessOpen(true); setMenuOpen(false); }}
+          >
+            Industries We Serve
+          </button>
+          <a className="btn btn-primary mobile-cta" href="#contact">
+            Get Free Consultation
+          </a>
+        </div>
       </div>
 
+      {/* ── BUSINESS PANEL ── */}
       <aside className={`business-panel ${businessOpen ? "open" : ""}`}>
         <div className="business-panel-inner">
           <div className="business-panel-head">
             <div>
-              <p className="eyebrow">Business</p>
-              <h3>Industry Expertise</h3>
+              <p className="eyebrow">Industries</p>
+              <h3>We Serve Every Sector</h3>
             </div>
             <button
               type="button"
               className="icon-button"
-              aria-label="Close business panel"
+              aria-label="Close panel"
               onClick={() => setBusinessOpen(false)}
-            >
-              ×
-            </button>
+            >×</button>
           </div>
           <ul className="business-list">
-            {businessCategories.map((category) => (
-              <li key={category}>{category}</li>
+            {businessCategories.map((cat) => (
+              <li key={cat}>
+                <span className="biz-dot" />
+                {cat}
+              </li>
             ))}
           </ul>
+          <a className="btn btn-primary" href="#contact" onClick={() => setBusinessOpen(false)}>
+            Start a Project
+          </a>
         </div>
       </aside>
 
       <main>
-        <section id="home" className="hero-section section reveal-on-scroll">
+
+        {/* ══════════════════════════════════════════
+            HERO — Video on the RIGHT, copy on LEFT
+            The old right-side "About Us" dialog box
+            is replaced by the video. The panel content
+            is now the inline #about-inline block below.
+        ══════════════════════════════════════════ */}
+        <section id="home" className="hero-section section">
+          <div className="hero-bg-grid" aria-hidden="true" />
+
           <div className="container hero-grid">
-            <div className="hero-copy">
-              <p className="eyebrow">
-                Premium digital marketing agency in India
+
+            {/* LEFT: copy */}
+            <div className="hero-copy reveal-on-scroll">
+              <p className="eyebrow hero-eyebrow">
+                Premium Digital Marketing Agency · India
               </p>
-              <h1>We build brands that generate traffic, leads and revenue.</h1>
+              <h1 className="hero-headline">
+                We build brands that generate{" "}
+                <span className="headline-accent">traffic, leads</span>{" "}
+                and revenue.
+              </h1>
               <p className="hero-description">
                 From SEO and social media to paid campaigns and website design,
                 DBG helps ambitious brands grow with premium digital strategy.
               </p>
+
               <div className="hero-actions">
-                <a className="button button-primary" href="#contact">
-                  Get Started
+                <a className="btn btn-primary btn-lg" href="#contact">
+                  Get Free Consultation
                 </a>
-                <a className="button button-secondary" href="#services">
-                  View Services
+                <a className="btn btn-ghost btn-lg" href="#services">
+                  View Services ↓
                 </a>
               </div>
-              <div className="hero-badges">
-                <div>
-                  <strong>50+</strong>
-                  <span>Happy Clients</span>
-                </div>
-                <div>
-                  <strong>70%</strong>
-                  <span>Average ROI</span>
-                </div>
-                <div>
-                  <strong>8+</strong>
-                  <span>Years Experience</span>
-                </div>
+
+              {/* Stats row — replaces old badges */}
+              <div className="hero-stats">
+                {stats.map((s) => (
+                  <div key={s.label} className="hero-stat">
+                    <strong>{s.value}</strong>
+                    <span>{s.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="hero-panel">
-              <span className="panel-label">About Us</span>
-              <h2>WELCOME TO DBG</h2>
+            {/* RIGHT: Hero Video (replaces old dialog box) */}
+            <div className="hero-video-pane reveal-on-scroll">
+              <div className="hero-video-wrap">
+                <video
+                  className="hero-player"
+                  playsInline
+                  preload="metadata"
+                  poster="/images/video-poster.jpg"
+                  controls={!videoAutoplay}
+                  {...(videoAutoplay
+                    ? { autoPlay: true, muted: true, loop: true }
+                    : {})}
+                >
+                  <source src="/videos/hero-demo.mp4" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
+                {/* Floating badge overlay */}
+                <div className="video-badge video-badge--tl">
+                  <span className="vb-dot" />
+                  Live Results
+                </div>
+                <div className="video-badge video-badge--br">
+                  🏆 Award Winning Agency
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════
+            ABOUT-INLINE — replaces the old hero panel.
+            Shows the "WELCOME TO DBG" content directly
+            on the homepage as a distinct section.
+            (Previously hidden in the right-side dialog.)
+        ══════════════════════════════════════════ */}
+        <section id="about-inline" className="about-inline-section section reveal-on-scroll">
+          <div className="container about-inline-grid">
+            <div className="about-inline-label">
+              <p className="eyebrow">Who We Are</p>
+              <div className="about-inline-line" />
+            </div>
+            <div className="about-inline-copy">
+              <h2>Welcome to DBG</h2>
               <p>
                 Shaping digital journeys with a passionate digital marketing
                 agency in India. We blend creativity, technology and performance
                 to help brands stand out and grow online.
               </p>
-              <ul className="hero-panel-list">
+              <ul className="about-inline-list">
                 <li>Custom campaigns for startup and enterprise growth.</li>
                 <li>Brand-first storytelling with measurable marketing.</li>
-                <li>
-                  Full-service digital solutions from strategy to execution.
-                </li>
+                <li>Full-service digital solutions from strategy to execution.</li>
               </ul>
-              <a className="button button-outline" href="#about">
-                Read More
-              </a>
+            </div>
+            <div className="about-inline-cards">
+              <div className="about-chip">
+                <span className="chip-icon">🎯</span>
+                <div>
+                  <strong>Precision Strategy</strong>
+                  <p>Data-informed decisions at every step.</p>
+                </div>
+              </div>
+              <div className="about-chip">
+                <span className="chip-icon">💡</span>
+                <div>
+                  <strong>Creative Execution</strong>
+                  <p>Content that converts and campaigns that scale.</p>
+                </div>
+              </div>
+              <div className="about-chip">
+                <span className="chip-icon">📊</span>
+                <div>
+                  <strong>Transparent Reporting</strong>
+                  <p>Real numbers, real outcomes, no fluff.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* ── WHY CHOOSE US ── */}
+        <WhyChooseUsSection />
+
+        {/* ── ABOUT (full) ── */}
         <section id="about" className="about-section section reveal-on-scroll">
           <div className="container about-grid">
             <div className="about-copy">
-              <p className="eyebrow">About Us</p>
+              <p className="eyebrow">About DBG</p>
               <h2>Shaping digital journeys with strategic marketing.</h2>
               <p>
                 DBG is a premium digital marketing agency focused on helping
-                businesses in India and beyond to build authority, capture
-                demand, and scale sustainably.
+                businesses in India and beyond build authority, capture demand,
+                and scale sustainably.
               </p>
               <p>
                 We deliver polished websites, powerful SEO, engaging social
                 campaigns and ROI-focused ad programs—all with clarity,
                 communication, and digital-first intelligence.
               </p>
+              <a className="btn btn-primary" href="#contact">
+                Start Your Project
+              </a>
             </div>
             <div className="about-card">
               <div className="about-card-top">
@@ -325,61 +432,57 @@ function App() {
           </div>
         </section>
 
-        <section
-          id="services"
-          className="services-section section reveal-on-scroll"
-        >
+        {/* ── SERVICES ── */}
+        <section id="services" className="services-section section reveal-on-scroll">
           <div className="container section-header">
             <p className="eyebrow">What We Do</p>
             <h2>Boost Your Brand with Expert Digital Marketing Services</h2>
-            <p>
-              Full-service marketing designed for growth, visibility and
-              business results.
-            </p>
+            <p>Full-service marketing designed for growth, visibility and business results.</p>
           </div>
-
-          <div className="container services-grid">
-            {serviceItems.map((service) => (
-              <article key={service.title} className="service-card">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <ul>
-                  {service.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-                <a className="service-link" href="#contact">
-                  Read More →
-                </a>
-              </article>
-            ))}
+          <div className="container">
+            {serviceItems.some((s) => s.image) ? (
+              <ServiceCarousel items={serviceItems} />
+            ) : (
+              <div className="services-grid">
+                {serviceItems.map((service) => (
+                  <article key={service.title} className="service-card">
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
+                    <ul>
+                      {service.features.map((f) => (
+                        <li key={f}>{f}</li>
+                      ))}
+                    </ul>
+                    <a className="service-link" href="#contact">Read More →</a>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
-        <section
-          id="packages"
-          className="packages-section section reveal-on-scroll"
-        >
+        {/* ── PACKAGES ── */}
+        <section id="packages" className="packages-section section reveal-on-scroll">
           <div className="container section-header">
             <p className="eyebrow">Packages</p>
             <h2>Choose a package for your next growth stage</h2>
-            <p>
-              Simple, smart packages that make it easy to start marketing with
-              confidence.
-            </p>
+            <p>Simple, smart packages that make it easy to start marketing with confidence.</p>
           </div>
-
           <div className="container packages-grid">
-            {packageCards.map((pkg) => (
-              <div key={pkg.title} className="package-card">
+            {packageCards.map((pkg, i) => (
+              <div key={pkg.title} className={`package-card${i === 1 ? " package-card--featured" : ""}`}>
+                <div className="pkg-icon">{pkg.icon}</div>
+                {i === 1 && <span className="pkg-badge">Most Popular</span>}
                 <h3>{pkg.title}</h3>
-                <p>{pkg.subtitle}</p>
+                <p className="pkg-subtitle">{pkg.subtitle}</p>
                 <ul>
                   {pkg.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}>
+                      <span className="check">✓</span> {item}
+                    </li>
                   ))}
                 </ul>
-                <a className="button button-secondary" href="#contact">
+                <a className={`btn ${i === 1 ? "btn-primary" : "btn-ghost"}`} href="#contact">
                   Explore Package
                 </a>
               </div>
@@ -387,39 +490,37 @@ function App() {
           </div>
         </section>
 
-        <section
-          id="contact"
-          className="contact-section section reveal-on-scroll"
-        >
+        {/* ── CONTACT ── */}
+        <section id="contact" className="contact-section section reveal-on-scroll">
           <div className="container contact-grid">
             <div className="contact-copy">
-              <p className="eyebrow">Let’s Build Your Growth Story</p>
+              <p className="eyebrow">Let's Build Together</p>
               <h2>Ready to launch your next digital campaign?</h2>
               <p>
-                Contact DBG for a free consultation, campaign strategy or brand
-                growth plan.
+                Contact DBG for a free consultation, campaign strategy or brand growth plan.
               </p>
               <div className="contact-details">
-                <div>
-                  <strong>Phone</strong>
-                  <a href="tel:+918368123312">+91 83681 23312</a>
-                </div>
-                <div>
-                  <strong>Email</strong>
-                  <a href="mailto:info@digitalbrandsgrowth.com">
-                    info@digitalbrandsgrowth.com
-                  </a>
-                </div>
-                <div>
-                  <strong>Website</strong>
-                  <a
-                    href="https://www.digitalbrandsgrowth.com"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    digitalbrandsgrowth.com
-                  </a>
-                </div>
+                <a href="tel:+918368123312" className="contact-item">
+                  <span className="contact-icon">📞</span>
+                  <div>
+                    <strong>Phone</strong>
+                    <span>+91 83681 23312</span>
+                  </div>
+                </a>
+                <a href="mailto:info@digitalbrandsgrowth.com" className="contact-item">
+                  <span className="contact-icon">✉️</span>
+                  <div>
+                    <strong>Email</strong>
+                    <span>info@digitalbrandsgrowth.com</span>
+                  </div>
+                </a>
+                <a href="https://www.digitalbrandsgrowth.com" target="_blank" rel="noreferrer" className="contact-item">
+                  <span className="contact-icon">🌐</span>
+                  <div>
+                    <strong>Website</strong>
+                    <span>digitalbrandsgrowth.com</span>
+                  </div>
+                </a>
               </div>
             </div>
 
@@ -448,61 +549,60 @@ function App() {
               </label>
               <label>
                 Message
-                <textarea rows="5" placeholder="Tell us about your goals" />
+                <textarea rows="4" placeholder="Tell us about your goals" />
               </label>
-              <button type="submit" className="button button-primary">
-                Send Message
+              <button type="submit" className="btn btn-primary btn-full">
+                Send Message →
               </button>
             </form>
           </div>
         </section>
       </main>
 
-      <footer className="site-footer section">
+      {/* ── FOOTER ── */}
+      <footer className="site-footer">
         <div className="container footer-grid">
-          <div>
+          <div className="footer-brand-col">
             <a className="brand footer-brand" href="#home">
-              <span>DBG</span>
-              <strong>Digital Brands Growth</strong>
+              <span className="brand-mark">DBG</span>
+              <strong className="brand-name">Digital Brands Growth</strong>
             </a>
-            <p>
-              Premium digital marketing services for startups, local businesses,
-              and growth-focused brands.
-            </p>
+            <p>Premium digital marketing services for startups, local businesses, and growth-focused brands.</p>
+            <div className="footer-socials">
+              <a href="#" aria-label="LinkedIn">in</a>
+              <a href="#" aria-label="Twitter">𝕏</a>
+              <a href="#" aria-label="Instagram">IG</a>
+            </div>
           </div>
           <div>
-            <h3>Services</h3>
+            <h4>Services</h4>
             <ul>
-              {serviceItems.slice(0, 4).map((service) => (
-                <li key={service.title}>
-                  <a href="#services">{service.title}</a>
-                </li>
+              {serviceItems.map((s) => (
+                <li key={s.title}><a href="#services">{s.title}</a></li>
               ))}
             </ul>
           </div>
           <div>
-            <h3>Quick Links</h3>
+            <h4>Company</h4>
             <ul>
-              <li>
-                <a href="#about">About</a>
-              </li>
-              <li>
-                <a href="#packages">Packages</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
+              <li><a href="#about">About DBG</a></li>
+              <li><a href="#packages">Packages</a></li>
+              <li><a href="https://www.rapiddigitalgrowth.com/blogs" target="_blank" rel="noreferrer">Blogs</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
           <div>
-            <h3>Contact</h3>
+            <h4>Get in Touch</h4>
             <p>info@digitalbrandsgrowth.com</p>
             <p>+91 83681 23312</p>
+            <a className="btn btn-ghost footer-cta" href="#contact">
+              Free Consultation
+            </a>
           </div>
         </div>
         <div className="container footer-bottom">
-          <p>© {currentYear} Digital Brands Growth — Designed by DBG</p>
-          <a href="#home">Back to top</a>
+          <p>© {currentYear} Digital Brands Growth. All rights reserved.</p>
+          <a href="#home">↑ Back to top</a>
         </div>
       </footer>
     </div>
