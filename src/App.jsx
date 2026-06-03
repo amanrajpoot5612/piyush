@@ -7,102 +7,80 @@ import "./App.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const heroVideo = "/WhatsApp%20Video%202026-05-31%20at%203.15.20%20PM.mp4";
+
 const navItems = ["Services", "Work", "Process", "About", "Contact"];
 
 const services = [
   {
-    title: "Websites",
-    kicker: "High-converting web experiences",
-    copy: "Editorial layouts, sharp performance, and premium interaction systems for brands that need to look expensive and convert.",
+    title: "Website Design",
+    copy: "Responsive, SEO-ready websites with modern layouts, fast loading, and clean brand storytelling.",
+    points: ["Mobile-first design", "CMS-ready structure", "Conversion sections"],
   },
   {
-    title: "Applications",
-    kicker: "SaaS, dashboards, portals",
-    copy: "Product interfaces designed for clarity, speed, and repeated use across customer, team, and admin workflows.",
+    title: "SEO Services",
+    copy: "Technical, local, and content-led SEO programs designed to increase search visibility and qualified traffic.",
+    points: ["Website audits", "Keyword strategy", "On-page optimization"],
   },
   {
-    title: "Growth Systems",
-    kicker: "Funnels, SEO, paid media",
-    copy: "Acquisition systems that connect creative direction with measurable revenue, retention, and qualified demand.",
+    title: "Social Marketing",
+    copy: "Platform-specific social campaigns that build audience trust and make your brand visible every week.",
+    points: ["Content calendars", "Creative direction", "Community growth"],
   },
   {
-    title: "Brand Motion",
-    kicker: "Cinematic digital identity",
-    copy: "Launch films, interaction language, and motion principles that make your brand feel unmistakably premium.",
+    title: "Paid Ads",
+    copy: "Google, Meta, and marketplace campaigns built around ROI, audience segmentation, and testing.",
+    points: ["Funnel setup", "Creative testing", "Budget optimization"],
   },
 ];
 
 const caseStudies = [
-  {
-    title: "Aurum Capital",
-    type: "Fintech Platform",
-    metric: "+184% qualified pipeline",
-    image: "/images/services/service-1.jpg",
-  },
-  {
-    title: "Vanta Studio",
-    type: "Luxury Commerce",
-    metric: "3.8x conversion lift",
-    image: "/images/services/service-2.jpg",
-  },
-  {
-    title: "Helio Health",
-    type: "Healthcare Experience",
-    metric: "42% lower bounce rate",
-    image: "/images/services/service-3.jpg",
-  },
+  ["Healthcare Growth", "Local SEO + website redesign", "+68% qualified calls"],
+  ["Restaurant Launch", "Social content + paid ads", "4.2x return on ad spend"],
+  ["Real Estate Funnel", "Landing pages + Google Ads", "+132% lead volume"],
 ];
 
 const process = [
-  ["01", "Discover", "We audit the brand, market, audience, and revenue path before a single pixel moves."],
-  ["02", "Design", "We craft a cinematic interface system with hierarchy, motion, and conversion logic."],
-  ["03", "Develop", "We build fast, responsive, scalable frontends with clean implementation details."],
-  ["04", "Grow", "We refine, launch, track, and optimize the product around commercial outcomes."],
+  ["01", "Research", "We study your category, competitors, customers, and existing digital performance."],
+  ["02", "Strategy", "We map the website, campaign plan, SEO priorities, and conversion journey."],
+  ["03", "Build", "We design, develop, write, optimize, and launch with polished execution."],
+  ["04", "Scale", "We track results, improve campaigns, and keep growth moving with clear reporting."],
 ];
 
 const testimonials = [
   {
-    quote:
-      "They transformed our site from a brochure into a serious sales asset. The brand finally feels as premium as the product.",
+    quote: "The website finally looks like a serious business asset. It is clean, fast, and much easier for clients to trust.",
     name: "Rhea Kapoor",
     role: "Founder, Maison Labs",
   },
   {
-    quote:
-      "The team thinks like a creative studio and executes like a growth partner. That combination is rare.",
+    quote: "Their team gave us the strategy, creatives, and campaign structure we were missing.",
     name: "Arjun Mehta",
-    role: "CEO, Northstar Cloud",
+    role: "Director, Northstar Cloud",
   },
   {
-    quote:
-      "Every interaction felt intentional. Our customers noticed the upgrade within the first week.",
+    quote: "The blue and white design feels premium but still approachable for our customers.",
     name: "Nisha Rao",
     role: "Marketing Lead, Elevate",
   },
 ];
 
 const stats = [
-  ["72", "Projects Launched", "+"],
-  ["5", "Avg Growth Multiple", "x"],
-  ["48", "Launch Sprints", "h"],
-  ["92", "Client Retention", "%"],
+  ["50", "Happy Clients", "+"],
+  ["70", "Average ROI", "%"],
+  ["8", "Years Experience", "+"],
+  ["4", "Traffic Growth", "x"],
 ];
 
-function usePremiumMotion(loaderDone) {
+function usePageMotion(loaderDone) {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.15,
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-    });
-
+    const lenis = new Lenis({ duration: 1.08, smoothWheel: true, wheelMultiplier: 0.9 });
     let frameId;
     const raf = (time) => {
       lenis.raf(time);
       frameId = requestAnimationFrame(raf);
     };
     frameId = requestAnimationFrame(raf);
-
     return () => {
       cancelAnimationFrame(frameId);
       lenis.destroy();
@@ -114,41 +92,25 @@ function usePremiumMotion(loaderDone) {
 
     const ctx = gsap.context(() => {
       gsap.from(".reveal-text", {
-        yPercent: 115,
+        yPercent: 110,
         opacity: 0,
-        duration: 1.05,
+        duration: 1,
         ease: "power4.out",
-        stagger: 0.08,
+        stagger: 0.07,
       });
 
       gsap.utils.toArray(".gsap-reveal").forEach((item) => {
         gsap.fromTo(
           item,
-          { y: 70, opacity: 0 },
+          { y: 56, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: 0.95,
             ease: "power3.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 82%",
-            },
+            scrollTrigger: { trigger: item, start: "top 84%" },
           },
         );
-      });
-
-      gsap.utils.toArray(".parallax-media").forEach((item) => {
-        gsap.to(item, {
-          yPercent: -12,
-          ease: "none",
-          scrollTrigger: {
-            trigger: item,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
       });
 
       gsap.utils.toArray(".stat-number").forEach((item) => {
@@ -156,16 +118,24 @@ function usePremiumMotion(loaderDone) {
         const counter = { value: 0 };
         gsap.to(counter, {
           value: target,
-          duration: 1.8,
+          duration: 1.7,
           ease: "power2.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-          },
+          scrollTrigger: { trigger: item, start: "top 88%" },
           onUpdate: () => {
             item.textContent = Math.round(counter.value).toString();
           },
         });
+      });
+
+      gsap.to(".video-card", {
+        yPercent: -8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
       });
     });
 
@@ -173,31 +143,31 @@ function usePremiumMotion(loaderDone) {
   }, [loaderDone]);
 }
 
-function LoadingScreen({ done }) {
+function LoadingScreen({ done, theme }) {
   return (
     <motion.div
-      className="loader"
+      className={`loader ${theme === "light" ? "loader-light" : ""}`}
       initial={{ opacity: 1 }}
       animate={{ opacity: done ? 0 : 1, pointerEvents: done ? "none" : "auto" }}
-      transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
     >
       <video className="loader-video" autoPlay muted loop playsInline>
-        <source src="/videos/hero-demo.mp4" type="video/mp4" />
+        <source src={heroVideo} type="video/mp4" />
       </video>
       <div className="loader-scrim" />
       <motion.div
         className="loader-logo"
         initial={{ clipPath: "inset(0 100% 0 0)" }}
         animate={{ clipPath: "inset(0 0% 0 0)" }}
-        transition={{ duration: 1.15, ease: [0.76, 0, 0.24, 1] }}
+        transition={{ duration: 1.05, ease: [0.76, 0, 0.24, 1] }}
       >
-        DBG
+        RDG
       </motion.div>
       <div className="loader-progress">
         <motion.span
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1.8, ease: "easeInOut" }}
+          transition={{ duration: 1.75, ease: "easeInOut" }}
         />
       </div>
     </motion.div>
@@ -206,13 +176,14 @@ function LoadingScreen({ done }) {
 
 function App() {
   const [loaderDone, setLoaderDone] = useState(false);
+  const [theme, setTheme] = useState("light");
   const year = new Date().getFullYear();
   const cursorRef = useRef(null);
 
-  usePremiumMotion(loaderDone);
+  usePageMotion(loaderDone);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoaderDone(true), 2100);
+    const timer = window.setTimeout(() => setLoaderDone(true), 2000);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -228,14 +199,14 @@ function App() {
 
   return (
     <>
-      <LoadingScreen done={loaderDone} />
+      <LoadingScreen done={loaderDone} theme={theme} />
       <div className="custom-cursor" ref={cursorRef} aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
-      <div className="site-shell">
+      <div className={`site-shell theme-${theme}`}>
         <header className="site-header">
-          <a className="brand" href="#home" aria-label="DBG home">
-            <span>DBG</span>
-            <strong>Digital Brands Growth</strong>
+          <a className="brand" href="#home" aria-label="RDG home">
+            <span>RDG</span>
+            <strong>Rapid Digital Growth</strong>
           </a>
           <nav aria-label="Primary navigation">
             {navItems.map((item) => (
@@ -244,19 +215,25 @@ function App() {
               </a>
             ))}
           </nav>
-          <a className="nav-cta" href="#contact">
-            Start a Project
-          </a>
+          <div className="header-actions">
+            <button
+              className="theme-toggle"
+              type="button"
+              onClick={() => setTheme((value) => (value === "light" ? "dark" : "light"))}
+            >
+              {theme === "light" ? "Dark" : "Light"}
+            </button>
+            <a className="nav-cta" href="#contact">
+              Let's Talk
+            </a>
+          </div>
         </header>
 
         <main>
           <section id="home" className="hero-section">
-            <video className="hero-video" autoPlay muted loop playsInline poster="/images/video-poster.jpg">
-              <source src="/videos/hero-demo.mp4" type="video/mp4" />
-            </video>
-            <div className="hero-overlay" />
+            <div className="hero-bg" aria-hidden="true" />
             <div className="hero-content">
-              <p className="eyebrow reveal-text">Premium Digital Agency</p>
+              <p className="eyebrow reveal-text">Digital Marketing Agency in India</p>
               <h1>
                 <span className="line-mask">
                   <span className="reveal-text">Building Digital</span>
@@ -272,7 +249,7 @@ function App() {
                 className="hero-subtitle"
                 initial={{ opacity: 0, y: 24 }}
                 animate={loaderDone ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.25, duration: 0.9 }}
+                transition={{ delay: 0.25, duration: 0.85 }}
               >
                 We design and develop high-performance websites, applications, and digital
                 products for ambitious brands.
@@ -281,7 +258,7 @@ function App() {
                 className="hero-actions"
                 initial={{ opacity: 0, y: 24 }}
                 animate={loaderDone ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.42, duration: 0.9 }}
+                transition={{ delay: 0.42, duration: 0.85 }}
               >
                 <a className="button button-primary" href="#contact">
                   Start a Project
@@ -291,26 +268,54 @@ function App() {
                 </a>
               </motion.div>
             </div>
+
+            <motion.div
+              className="video-card"
+              initial={{ opacity: 0, y: 38, scale: 0.96 }}
+              animate={loaderDone ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ delay: 0.32, duration: 1, ease: [0.2, 0.8, 0.2, 1] }}
+            >
+              <div className="video-toolbar">
+                <span />
+                <span />
+                <span />
+                <strong>Growth Studio Reel</strong>
+              </div>
+              <div className="video-frame">
+                <video autoPlay muted loop playsInline controls>
+                  <source src={heroVideo} type="video/mp4" />
+                </video>
+              </div>
+              <div className="video-caption">
+                <span>Landscape brand video</span>
+                <strong>Strategy + Design + Marketing</strong>
+              </div>
+            </motion.div>
+
             <div className="hero-meta">
-              <span>Strategy</span>
-              <span>Design</span>
-              <span>Development</span>
-              <span>Growth</span>
+              <span>SEO</span>
+              <span>Website Design</span>
+              <span>Social Media</span>
+              <span>Paid Ads</span>
             </div>
           </section>
 
           <section id="services" className="section services-section">
             <div className="section-heading gsap-reveal">
-              <p className="eyebrow">Capabilities</p>
-              <h2>Premium execution across every layer of the digital experience.</h2>
+              <p className="eyebrow">What We Do</p>
+              <h2>Boost your brand with expert digital marketing services.</h2>
             </div>
             <div className="services-grid">
               {services.map((service, index) => (
                 <article className="glass-card service-card gsap-reveal" key={service.title}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <h3>{service.title}</h3>
-                  <p className="service-kicker">{service.kicker}</p>
                   <p>{service.copy}</p>
+                  <ul>
+                    {service.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
                 </article>
               ))}
             </div>
@@ -319,20 +324,22 @@ function App() {
           <section id="work" className="section work-section">
             <div className="section-heading section-heading-wide gsap-reveal">
               <p className="eyebrow">Featured Case Studies</p>
-              <h2>Large-format digital products built to feel inevitable.</h2>
+              <h2>Professional campaigns presented with a premium agency finish.</h2>
             </div>
             <div className="case-grid">
-              {caseStudies.map((project) => (
-                <article className="case-card gsap-reveal" key={project.title}>
-                  <div className="case-media">
-                    <img className="parallax-media" src={project.image} alt={`${project.title} project mockup`} />
+              {caseStudies.map(([title, type, metric]) => (
+                <article className="case-card gsap-reveal" key={title}>
+                  <div className="case-visual">
+                    <video autoPlay muted loop playsInline>
+                      <source src={heroVideo} type="video/mp4" />
+                    </video>
                   </div>
                   <div className="case-content">
                     <div>
-                      <p>{project.type}</p>
-                      <h3>{project.title}</h3>
+                      <p>{type}</p>
+                      <h3>{title}</h3>
                     </div>
-                    <strong>{project.metric}</strong>
+                    <strong>{metric}</strong>
                   </div>
                 </article>
               ))}
@@ -341,8 +348,8 @@ function App() {
 
           <section id="process" className="section process-section">
             <div className="section-heading gsap-reveal">
-              <p className="eyebrow">Process</p>
-              <h2>A clear path from ambitious idea to measurable launch.</h2>
+              <p className="eyebrow">Company Process</p>
+              <h2>From digital strategy to measurable growth.</h2>
             </div>
             <div className="timeline">
               {process.map(([number, title, copy]) => (
@@ -384,32 +391,35 @@ function App() {
           </section>
 
           <section id="about" className="section about-section">
-            <div className="about-media gsap-reveal">
-              <img className="parallax-media" src="/images/services/service-4.jpg" alt="Agency strategy workspace" />
+            <div className="about-video gsap-reveal">
+              <video autoPlay muted loop playsInline controls>
+                <source src={heroVideo} type="video/mp4" />
+              </video>
             </div>
             <div className="about-copy gsap-reveal">
-              <p className="eyebrow">About Agency</p>
-              <h2>We are built for brands that want presence, performance, and polish.</h2>
+              <p className="eyebrow">Welcome to RDG</p>
+              <h2>Shaping digital journeys with a passionate growth agency.</h2>
               <p>
-                DBG combines creative direction, product thinking, and growth marketing
-                into one senior-led studio. The result is not a personal portfolio site;
-                it is a commercial-grade digital presence designed to justify serious
-                project investments.
+                We blend creativity, technology, SEO, social media, paid campaigns,
+                and website development to help businesses build trust and grow with
+                clarity. The layout is light, polished, and blue-led like a modern RDG-style
+                agency page, while still keeping the premium studio energy.
               </p>
               <div className="about-list">
-                <span>Brand systems</span>
-                <span>Conversion strategy</span>
-                <span>Motion direction</span>
-                <span>Performance builds</span>
+                <span>Hospitals</span>
+                <span>Restaurants</span>
+                <span>Education</span>
+                <span>Real Estate</span>
+                <span>E-Commerce</span>
               </div>
             </div>
           </section>
 
           <section id="contact" className="contact-section">
             <div className="contact-inner gsap-reveal">
-              <p className="eyebrow">Contact CTA</p>
-              <h2>Ready to build something that looks premium and sells like it?</h2>
-              <p>Projects typically range from ₹50,000 to ₹5,00,000+ depending on scope, speed, and growth goals.</p>
+              <p className="eyebrow">Let's Build Together</p>
+              <h2>Ready to launch a cleaner, faster, more premium digital presence?</h2>
+              <p>Projects can be shaped for practical growth packages or premium custom builds from Rs 50,000 to Rs 5,00,000+.</p>
               <div className="contact-actions">
                 <a className="button button-primary" href="mailto:info@digitalbrandsgrowth.com">
                   Start a Project
@@ -423,8 +433,8 @@ function App() {
         </main>
 
         <footer className="site-footer">
-          <span>DBG © {year}</span>
-          <span>Premium digital experiences for ambitious brands.</span>
+          <span>RDG © {year}</span>
+          <span>White and blue digital marketing landing page.</span>
         </footer>
       </div>
     </>
