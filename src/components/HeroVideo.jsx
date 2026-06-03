@@ -1,5 +1,3 @@
-import React from "react";
-
 /**
  * HeroVideo — standalone video section.
  * The hero's main video is now built directly into App.jsx's hero-video-pane.

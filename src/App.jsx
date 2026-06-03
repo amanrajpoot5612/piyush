@@ -1,611 +1,433 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import "./App.css";
-import ServiceCarousel from "./components/ServiceCarousel";
-import WhyChooseUsSection from "./components/WhyChooseUsSection";
 
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "Packages", href: "#packages" },
+gsap.registerPlugin(ScrollTrigger);
+
+const navItems = ["Services", "Work", "Process", "About", "Contact"];
+
+const services = [
   {
-    label: "Blogs",
-    href: "https://www.rapiddigitalgrowth.com/blogs",
-    external: true,
+    title: "Websites",
+    kicker: "High-converting web experiences",
+    copy: "Editorial layouts, sharp performance, and premium interaction systems for brands that need to look expensive and convert.",
   },
-  { label: "About Us", href: "#about" },
-  { label: "Contact Us", href: "#contact" },
-];
-
-const businessCategories = [
-  "Hospital & Healthcare",
-  "Hotels & Restaurant",
-  "Education",
-  "Law",
-  "B2B",
-  "Real Estate",
-  "E-Commerce",
-];
-
-const serviceItems = [
   {
-    title: "Website Design & Development",
-    description:
-      "Responsive websites built for performance, conversion, and brand clarity.",
-    features: [
-      "Mobile-first layouts",
-      "SEO-friendly structure",
-      "Fast loading performance",
-      "Clean visual storytelling",
-    ],
+    title: "Applications",
+    kicker: "SaaS, dashboards, portals",
+    copy: "Product interfaces designed for clarity, speed, and repeated use across customer, team, and admin workflows.",
+  },
+  {
+    title: "Growth Systems",
+    kicker: "Funnels, SEO, paid media",
+    copy: "Acquisition systems that connect creative direction with measurable revenue, retention, and qualified demand.",
+  },
+  {
+    title: "Brand Motion",
+    kicker: "Cinematic digital identity",
+    copy: "Launch films, interaction language, and motion principles that make your brand feel unmistakably premium.",
+  },
+];
+
+const caseStudies = [
+  {
+    title: "Aurum Capital",
+    type: "Fintech Platform",
+    metric: "+184% qualified pipeline",
     image: "/images/services/service-1.jpg",
   },
   {
-    title: "SEO Optimization",
-    description:
-      "Search engine campaigns that improve rankings, visibility and trust.",
-    features: [
-      "Technical audits",
-      "Keyword research",
-      "On-page and off-page strategies",
-      "Sustainable organic growth",
-    ],
+    title: "Vanta Studio",
+    type: "Luxury Commerce",
+    metric: "3.8x conversion lift",
     image: "/images/services/service-2.jpg",
   },
   {
-    title: "Social Media Marketing",
-    description:
-      "Creative social campaigns that engage audiences and build authority.",
-    features: [
-      "Platform strategy",
-      "Content planning",
-      "Community management",
-      "Paid and organic growth",
-    ],
+    title: "Helio Health",
+    type: "Healthcare Experience",
+    metric: "42% lower bounce rate",
     image: "/images/services/service-3.jpg",
-  },
-  {
-    title: "Paid Ads Promotion",
-    description:
-      "Precision ad campaigns designed to maximize ROI and lead quality.",
-    features: [
-      "Google Ads and Meta ads",
-      "Audience segmentation",
-      "Creative testing",
-      "Performance optimization",
-    ],
-    image: "/images/services/service-4.jpg",
   },
 ];
 
-const packageCards = [
+const process = [
+  ["01", "Discover", "We audit the brand, market, audience, and revenue path before a single pixel moves."],
+  ["02", "Design", "We craft a cinematic interface system with hierarchy, motion, and conversion logic."],
+  ["03", "Develop", "We build fast, responsive, scalable frontends with clean implementation details."],
+  ["04", "Grow", "We refine, launch, track, and optimize the product around commercial outcomes."],
+];
+
+const testimonials = [
   {
-    title: "Website Packages",
-    subtitle: "Smart websites for fast-growing brands.",
-    icon: "🖥️",
-    items: [
-      "Custom design & development",
-      "CMS integration",
-      "Fast loading pages",
-      "SEO-ready structure",
-    ],
+    quote:
+      "They transformed our site from a brochure into a serious sales asset. The brand finally feels as premium as the product.",
+    name: "Rhea Kapoor",
+    role: "Founder, Maison Labs",
   },
   {
-    title: "SEO Packages",
-    subtitle: "Search growth packages for local and national brands.",
-    icon: "📈",
-    items: [
-      "Keyword research",
-      "Technical SEO audit",
-      "Link building support",
-      "Content optimization",
-    ],
+    quote:
+      "The team thinks like a creative studio and executes like a growth partner. That combination is rare.",
+    name: "Arjun Mehta",
+    role: "CEO, Northstar Cloud",
   },
   {
-    title: "Growth Packages",
-    subtitle: "Integrated campaigns that turn clicks into revenue.",
-    icon: "🚀",
-    items: [
-      "Social media planning",
-      "Paid ads management",
-      "Conversion funnels",
-      "Monthly reporting",
-    ],
+    quote:
+      "Every interaction felt intentional. Our customers noticed the upgrade within the first week.",
+    name: "Nisha Rao",
+    role: "Marketing Lead, Elevate",
   },
 ];
 
 const stats = [
-  { value: "50+", label: "Happy Clients" },
-  { value: "70%", label: "Average ROI" },
-  { value: "8+", label: "Years Experience" },
-  { value: "4x", label: "Avg Traffic Growth" },
+  ["72", "Projects Launched", "+"],
+  ["5", "Avg Growth Multiple", "x"],
+  ["48", "Launch Sprints", "h"],
+  ["92", "Client Retention", "%"],
 ];
 
-function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [businessOpen, setBusinessOpen] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const [videoAutoplay, setVideoAutoplay] = useState(false);
-  const currentYear = new Date().getFullYear();
-
+function usePremiumMotion(loaderDone) {
   useEffect(() => {
-    setLoaded(true);
+    const lenis = new Lenis({
+      duration: 1.15,
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+    });
 
-    const setVideoPreference = () => {
-      setVideoAutoplay(window.innerWidth >= 900);
+    let frameId;
+    const raf = (time) => {
+      lenis.raf(time);
+      frameId = requestAnimationFrame(raf);
     };
-    setVideoPreference();
-    window.addEventListener("resize", setVideoPreference);
-
-    const reveal = () => {
-      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-          el.classList.add("revealed");
-        }
-      });
-    };
-    reveal();
-    window.addEventListener("scroll", reveal, { passive: true });
+    frameId = requestAnimationFrame(raf);
 
     return () => {
-      window.removeEventListener("resize", setVideoPreference);
-      window.removeEventListener("scroll", reveal);
+      cancelAnimationFrame(frameId);
+      lenis.destroy();
     };
   }, []);
 
+  useEffect(() => {
+    if (!loaderDone) return undefined;
+
+    const ctx = gsap.context(() => {
+      gsap.from(".reveal-text", {
+        yPercent: 115,
+        opacity: 0,
+        duration: 1.05,
+        ease: "power4.out",
+        stagger: 0.08,
+      });
+
+      gsap.utils.toArray(".gsap-reveal").forEach((item) => {
+        gsap.fromTo(
+          item,
+          { y: 70, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 82%",
+            },
+          },
+        );
+      });
+
+      gsap.utils.toArray(".parallax-media").forEach((item) => {
+        gsap.to(item, {
+          yPercent: -12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: item,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+
+      gsap.utils.toArray(".stat-number").forEach((item) => {
+        const target = Number(item.dataset.value);
+        const counter = { value: 0 };
+        gsap.to(counter, {
+          value: target,
+          duration: 1.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+          },
+          onUpdate: () => {
+            item.textContent = Math.round(counter.value).toString();
+          },
+        });
+      });
+    });
+
+    return () => ctx.revert();
+  }, [loaderDone]);
+}
+
+function LoadingScreen({ done }) {
   return (
-    <div className={`page-shell${loaded ? " loaded" : ""}`}>
+    <motion.div
+      className="loader"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: done ? 0 : 1, pointerEvents: done ? "none" : "auto" }}
+      transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+    >
+      <video className="loader-video" autoPlay muted loop playsInline>
+        <source src="/videos/hero-demo.mp4" type="video/mp4" />
+      </video>
+      <div className="loader-scrim" />
+      <motion.div
+        className="loader-logo"
+        initial={{ clipPath: "inset(0 100% 0 0)" }}
+        animate={{ clipPath: "inset(0 0% 0 0)" }}
+        transition={{ duration: 1.15, ease: [0.76, 0, 0.24, 1] }}
+      >
+        DBG
+      </motion.div>
+      <div className="loader-progress">
+        <motion.span
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.8, ease: "easeInOut" }}
+        />
+      </div>
+    </motion.div>
+  );
+}
 
-      {/* ── HEADER ── */}
-      <header className="site-header">
-        <div className="container header-inner">
-          <a className="brand" href="#home">
-            <span className="brand-mark">DBG</span>
-            <strong className="brand-name">Digital Brands Growth</strong>
+function App() {
+  const [loaderDone, setLoaderDone] = useState(false);
+  const year = new Date().getFullYear();
+  const cursorRef = useRef(null);
+
+  usePremiumMotion(loaderDone);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setLoaderDone(true), 2100);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    if (!cursor) return undefined;
+    const move = (event) => {
+      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+    };
+    window.addEventListener("pointermove", move);
+    return () => window.removeEventListener("pointermove", move);
+  }, []);
+
+  return (
+    <>
+      <LoadingScreen done={loaderDone} />
+      <div className="custom-cursor" ref={cursorRef} aria-hidden="true" />
+      <div className="grain" aria-hidden="true" />
+      <div className="site-shell">
+        <header className="site-header">
+          <a className="brand" href="#home" aria-label="DBG home">
+            <span>DBG</span>
+            <strong>Digital Brands Growth</strong>
           </a>
-
-          <nav className="desktop-nav" aria-label="Primary navigation">
-            {navLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target={item.external ? "_blank" : "_self"}
-                rel={item.external ? "noreferrer" : undefined}
-              >
-                {item.label}
+          <nav aria-label="Primary navigation">
+            {navItems.map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`}>
+                {item}
               </a>
             ))}
           </nav>
-
-          <div className="header-actions">
-            <button
-              type="button"
-              className="btn btn-ghost"
-              onClick={() => { setBusinessOpen(true); setMenuOpen(false); }}
-            >
-              Industries
-            </button>
-            <a className="btn btn-primary" href="#contact">Let's Talk</a>
-            <button
-              type="button"
-              className={`menu-toggle ${menuOpen ? "open" : ""}`}
-              aria-label="Toggle menu"
-              onClick={() => setMenuOpen((o) => !o)}
-            >
-              <span /><span /><span />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* ── MOBILE MENU ── */}
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-        <div className="mobile-menu-top">
-          <a className="brand" href="#home">
-            <span className="brand-mark">DBG</span>
-          </a>
-          <button
-            type="button"
-            className="icon-button"
-            aria-label="Close menu"
-            onClick={() => setMenuOpen(false)}
-          >×</button>
-        </div>
-        <nav className="mobile-links">
-          {navLinks.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              target={item.external ? "_blank" : "_self"}
-              rel={item.external ? "noreferrer" : undefined}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <div className="mobile-menu-footer">
-          <button
-            type="button"
-            className="btn btn-ghost"
-            onClick={() => { setBusinessOpen(true); setMenuOpen(false); }}
-          >
-            Industries We Serve
-          </button>
-          <a className="btn btn-primary mobile-cta" href="#contact">
-            Get Free Consultation
-          </a>
-        </div>
-      </div>
-
-      {/* ── BUSINESS PANEL ── */}
-      <aside className={`business-panel ${businessOpen ? "open" : ""}`}>
-        <div className="business-panel-inner">
-          <div className="business-panel-head">
-            <div>
-              <p className="eyebrow">Industries</p>
-              <h3>We Serve Every Sector</h3>
-            </div>
-            <button
-              type="button"
-              className="icon-button"
-              aria-label="Close panel"
-              onClick={() => setBusinessOpen(false)}
-            >×</button>
-          </div>
-          <ul className="business-list">
-            {businessCategories.map((cat) => (
-              <li key={cat}>
-                <span className="biz-dot" />
-                {cat}
-              </li>
-            ))}
-          </ul>
-          <a className="btn btn-primary" href="#contact" onClick={() => setBusinessOpen(false)}>
+          <a className="nav-cta" href="#contact">
             Start a Project
           </a>
-        </div>
-      </aside>
+        </header>
 
-      <main>
-
-        {/* ══════════════════════════════════════════
-            HERO — Video on the RIGHT, copy on LEFT
-            The old right-side "About Us" dialog box
-            is replaced by the video. The panel content
-            is now the inline #about-inline block below.
-        ══════════════════════════════════════════ */}
-        <section id="home" className="hero-section section">
-          <div className="hero-bg-grid" aria-hidden="true" />
-
-          <div className="container hero-grid">
-
-            {/* LEFT: copy */}
-            <div className="hero-copy reveal-on-scroll">
-              <p className="eyebrow hero-eyebrow">
-                Premium Digital Marketing Agency · India
-              </p>
-              <h1 className="hero-headline">
-                We build brands that generate{" "}
-                <span className="headline-accent">traffic, leads</span>{" "}
-                and revenue.
+        <main>
+          <section id="home" className="hero-section">
+            <video className="hero-video" autoPlay muted loop playsInline poster="/images/video-poster.jpg">
+              <source src="/videos/hero-demo.mp4" type="video/mp4" />
+            </video>
+            <div className="hero-overlay" />
+            <div className="hero-content">
+              <p className="eyebrow reveal-text">Premium Digital Agency</p>
+              <h1>
+                <span className="line-mask">
+                  <span className="reveal-text">Building Digital</span>
+                </span>
+                <span className="line-mask">
+                  <span className="reveal-text">Experiences That</span>
+                </span>
+                <span className="line-mask">
+                  <span className="reveal-text">Drive Growth</span>
+                </span>
               </h1>
-              <p className="hero-description">
-                From SEO and social media to paid campaigns and website design,
-                DBG helps ambitious brands grow with premium digital strategy.
-              </p>
-
-              <div className="hero-actions">
-                <a className="btn btn-primary btn-lg" href="#contact">
-                  Get Free Consultation
+              <motion.p
+                className="hero-subtitle"
+                initial={{ opacity: 0, y: 24 }}
+                animate={loaderDone ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.25, duration: 0.9 }}
+              >
+                We design and develop high-performance websites, applications, and digital
+                products for ambitious brands.
+              </motion.p>
+              <motion.div
+                className="hero-actions"
+                initial={{ opacity: 0, y: 24 }}
+                animate={loaderDone ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.42, duration: 0.9 }}
+              >
+                <a className="button button-primary" href="#contact">
+                  Start a Project
                 </a>
-                <a className="btn btn-ghost btn-lg" href="#services">
-                  View Services ↓
+                <a className="button button-ghost" href="#work">
+                  View Our Work
                 </a>
-              </div>
+              </motion.div>
+            </div>
+            <div className="hero-meta">
+              <span>Strategy</span>
+              <span>Design</span>
+              <span>Development</span>
+              <span>Growth</span>
+            </div>
+          </section>
 
-              {/* Stats row — replaces old badges */}
-              <div className="hero-stats">
-                {stats.map((s) => (
-                  <div key={s.label} className="hero-stat">
-                    <strong>{s.value}</strong>
-                    <span>{s.label}</span>
+          <section id="services" className="section services-section">
+            <div className="section-heading gsap-reveal">
+              <p className="eyebrow">Capabilities</p>
+              <h2>Premium execution across every layer of the digital experience.</h2>
+            </div>
+            <div className="services-grid">
+              {services.map((service, index) => (
+                <article className="glass-card service-card gsap-reveal" key={service.title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{service.title}</h3>
+                  <p className="service-kicker">{service.kicker}</p>
+                  <p>{service.copy}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="work" className="section work-section">
+            <div className="section-heading section-heading-wide gsap-reveal">
+              <p className="eyebrow">Featured Case Studies</p>
+              <h2>Large-format digital products built to feel inevitable.</h2>
+            </div>
+            <div className="case-grid">
+              {caseStudies.map((project) => (
+                <article className="case-card gsap-reveal" key={project.title}>
+                  <div className="case-media">
+                    <img className="parallax-media" src={project.image} alt={`${project.title} project mockup`} />
                   </div>
-                ))}
-              </div>
+                  <div className="case-content">
+                    <div>
+                      <p>{project.type}</p>
+                      <h3>{project.title}</h3>
+                    </div>
+                    <strong>{project.metric}</strong>
+                  </div>
+                </article>
+              ))}
             </div>
+          </section>
 
-            {/* RIGHT: Hero Video (replaces old dialog box) */}
-            <div className="hero-video-pane reveal-on-scroll">
-              <div className="hero-video-wrap">
-                <video
-                  className="hero-player"
-                  playsInline
-                  preload="metadata"
-                  poster="/images/video-poster.jpg"
-                  controls={!videoAutoplay}
-                  {...(videoAutoplay
-                    ? { autoPlay: true, muted: true, loop: true }
-                    : {})}
-                >
-                  <source src="/videos/hero-demo.mp4" type="video/mp4" />
-                  Your browser does not support video.
-                </video>
-                {/* Floating badge overlay */}
-                <div className="video-badge video-badge--tl">
-                  <span className="vb-dot" />
-                  Live Results
-                </div>
-                <div className="video-badge video-badge--br">
-                  🏆 Award Winning Agency
-                </div>
-              </div>
+          <section id="process" className="section process-section">
+            <div className="section-heading gsap-reveal">
+              <p className="eyebrow">Process</p>
+              <h2>A clear path from ambitious idea to measurable launch.</h2>
             </div>
-          </div>
-        </section>
+            <div className="timeline">
+              {process.map(([number, title, copy]) => (
+                <article className="timeline-item gsap-reveal" key={title}>
+                  <span>{number}</span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </article>
+              ))}
+            </div>
+          </section>
 
-        {/* ══════════════════════════════════════════
-            ABOUT-INLINE — replaces the old hero panel.
-            Shows the "WELCOME TO DBG" content directly
-            on the homepage as a distinct section.
-            (Previously hidden in the right-side dialog.)
-        ══════════════════════════════════════════ */}
-        <section id="about-inline" className="about-inline-section section reveal-on-scroll">
-          <div className="container about-inline-grid">
-            <div className="about-inline-label">
-              <p className="eyebrow">Who We Are</p>
-              <div className="about-inline-line" />
+          <section className="section testimonials-section">
+            <div className="testimonial-strip gsap-reveal">
+              {testimonials.map((item) => (
+                <figure className="testimonial-card" key={item.name}>
+                  <blockquote>{item.quote}</blockquote>
+                  <figcaption>
+                    <strong>{item.name}</strong>
+                    <span>{item.role}</span>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
-            <div className="about-inline-copy">
-              <h2>Welcome to DBG</h2>
-              <p>
-                Shaping digital journeys with a passionate digital marketing
-                agency in India. We blend creativity, technology and performance
-                to help brands stand out and grow online.
-              </p>
-              <ul className="about-inline-list">
-                <li>Custom campaigns for startup and enterprise growth.</li>
-                <li>Brand-first storytelling with measurable marketing.</li>
-                <li>Full-service digital solutions from strategy to execution.</li>
-              </ul>
-            </div>
-            <div className="about-inline-cards">
-              <div className="about-chip">
-                <span className="chip-icon">🎯</span>
-                <div>
-                  <strong>Precision Strategy</strong>
-                  <p>Data-informed decisions at every step.</p>
-                </div>
-              </div>
-              <div className="about-chip">
-                <span className="chip-icon">💡</span>
-                <div>
-                  <strong>Creative Execution</strong>
-                  <p>Content that converts and campaigns that scale.</p>
-                </div>
-              </div>
-              <div className="about-chip">
-                <span className="chip-icon">📊</span>
-                <div>
-                  <strong>Transparent Reporting</strong>
-                  <p>Real numbers, real outcomes, no fluff.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        {/* ── WHY CHOOSE US ── */}
-        <WhyChooseUsSection />
-
-        {/* ── ABOUT (full) ── */}
-        <section id="about" className="about-section section reveal-on-scroll">
-          <div className="container about-grid">
-            <div className="about-copy">
-              <p className="eyebrow">About DBG</p>
-              <h2>Shaping digital journeys with strategic marketing.</h2>
-              <p>
-                DBG is a premium digital marketing agency focused on helping
-                businesses in India and beyond build authority, capture demand,
-                and scale sustainably.
-              </p>
-              <p>
-                We deliver polished websites, powerful SEO, engaging social
-                campaigns and ROI-focused ad programs—all with clarity,
-                communication, and digital-first intelligence.
-              </p>
-              <a className="btn btn-primary" href="#contact">
-                Start Your Project
-              </a>
-            </div>
-            <div className="about-card">
-              <div className="about-card-top">
-                <span className="eyebrow">Why choose DBG</span>
-                <h3>Growth that feels premium, not overpriced.</h3>
-              </div>
-              <ul className="about-features">
-                <li>Data-informed strategy with creative execution.</li>
-                <li>Transparent reporting and outcomes you can measure.</li>
-                <li>Flexible packages for startups and enterprise brands.</li>
-                <li>Dedicated support for every campaign phase.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ── SERVICES ── */}
-        <section id="services" className="services-section section reveal-on-scroll">
-          <div className="container section-header">
-            <p className="eyebrow">What We Do</p>
-            <h2>Boost Your Brand with Expert Digital Marketing Services</h2>
-            <p>Full-service marketing designed for growth, visibility and business results.</p>
-          </div>
-          <div className="container">
-            {serviceItems.some((s) => s.image) ? (
-              <ServiceCarousel items={serviceItems} />
-            ) : (
-              <div className="services-grid">
-                {serviceItems.map((service) => (
-                  <article key={service.title} className="service-card">
-                    <h3>{service.title}</h3>
-                    <p>{service.description}</p>
-                    <ul>
-                      {service.features.map((f) => (
-                        <li key={f}>{f}</li>
-                      ))}
-                    </ul>
-                    <a className="service-link" href="#contact">Read More →</a>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* ── PACKAGES ── */}
-        <section id="packages" className="packages-section section reveal-on-scroll">
-          <div className="container section-header">
-            <p className="eyebrow">Packages</p>
-            <h2>Choose a package for your next growth stage</h2>
-            <p>Simple, smart packages that make it easy to start marketing with confidence.</p>
-          </div>
-          <div className="container packages-grid">
-            {packageCards.map((pkg, i) => (
-              <div key={pkg.title} className={`package-card${i === 1 ? " package-card--featured" : ""}`}>
-                <div className="pkg-icon">{pkg.icon}</div>
-                {i === 1 && <span className="pkg-badge">Most Popular</span>}
-                <h3>{pkg.title}</h3>
-                <p className="pkg-subtitle">{pkg.subtitle}</p>
-                <ul>
-                  {pkg.items.map((item) => (
-                    <li key={item}>
-                      <span className="check">✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-                <a className={`btn ${i === 1 ? "btn-primary" : "btn-ghost"}`} href="#contact">
-                  Explore Package
-                </a>
+          <section className="stats-section gsap-reveal" aria-label="Agency statistics">
+            {stats.map(([value, label, suffix]) => (
+              <div className="stat-card" key={label}>
+                <strong>
+                  <span className="stat-number" data-value={value}>
+                    0
+                  </span>
+                  {suffix}
+                </strong>
+                <span>{label}</span>
               </div>
             ))}
-          </div>
-        </section>
+          </section>
 
-        {/* ── CONTACT ── */}
-        <section id="contact" className="contact-section section reveal-on-scroll">
-          <div className="container contact-grid">
-            <div className="contact-copy">
-              <p className="eyebrow">Let's Build Together</p>
-              <h2>Ready to launch your next digital campaign?</h2>
+          <section id="about" className="section about-section">
+            <div className="about-media gsap-reveal">
+              <img className="parallax-media" src="/images/services/service-4.jpg" alt="Agency strategy workspace" />
+            </div>
+            <div className="about-copy gsap-reveal">
+              <p className="eyebrow">About Agency</p>
+              <h2>We are built for brands that want presence, performance, and polish.</h2>
               <p>
-                Contact DBG for a free consultation, campaign strategy or brand growth plan.
+                DBG combines creative direction, product thinking, and growth marketing
+                into one senior-led studio. The result is not a personal portfolio site;
+                it is a commercial-grade digital presence designed to justify serious
+                project investments.
               </p>
-              <div className="contact-details">
-                <a href="tel:+918368123312" className="contact-item">
-                  <span className="contact-icon">📞</span>
-                  <div>
-                    <strong>Phone</strong>
-                    <span>+91 83681 23312</span>
-                  </div>
+              <div className="about-list">
+                <span>Brand systems</span>
+                <span>Conversion strategy</span>
+                <span>Motion direction</span>
+                <span>Performance builds</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="contact" className="contact-section">
+            <div className="contact-inner gsap-reveal">
+              <p className="eyebrow">Contact CTA</p>
+              <h2>Ready to build something that looks premium and sells like it?</h2>
+              <p>Projects typically range from ₹50,000 to ₹5,00,000+ depending on scope, speed, and growth goals.</p>
+              <div className="contact-actions">
+                <a className="button button-primary" href="mailto:info@digitalbrandsgrowth.com">
+                  Start a Project
                 </a>
-                <a href="mailto:info@digitalbrandsgrowth.com" className="contact-item">
-                  <span className="contact-icon">✉️</span>
-                  <div>
-                    <strong>Email</strong>
-                    <span>info@digitalbrandsgrowth.com</span>
-                  </div>
-                </a>
-                <a href="https://www.digitalbrandsgrowth.com" target="_blank" rel="noreferrer" className="contact-item">
-                  <span className="contact-icon">🌐</span>
-                  <div>
-                    <strong>Website</strong>
-                    <span>digitalbrandsgrowth.com</span>
-                  </div>
+                <a className="button button-ghost" href="tel:+918368123312">
+                  +91 83681 23312
                 </a>
               </div>
             </div>
+          </section>
+        </main>
 
-            <form className="contact-form">
-              <label>
-                Name
-                <input type="text" placeholder="Your name" />
-              </label>
-              <label>
-                Email
-                <input type="email" placeholder="you@company.com" />
-              </label>
-              <label>
-                Phone
-                <input type="tel" placeholder="+91 9XXXXXXXXX" />
-              </label>
-              <label>
-                Service Interested In
-                <select>
-                  <option>SEO</option>
-                  <option>SMO</option>
-                  <option>SMM</option>
-                  <option>Google Ads</option>
-                  <option>Website Design</option>
-                </select>
-              </label>
-              <label>
-                Message
-                <textarea rows="4" placeholder="Tell us about your goals" />
-              </label>
-              <button type="submit" className="btn btn-primary btn-full">
-                Send Message →
-              </button>
-            </form>
-          </div>
-        </section>
-      </main>
-
-      {/* ── FOOTER ── */}
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <div className="footer-brand-col">
-            <a className="brand footer-brand" href="#home">
-              <span className="brand-mark">DBG</span>
-              <strong className="brand-name">Digital Brands Growth</strong>
-            </a>
-            <p>Premium digital marketing services for startups, local businesses, and growth-focused brands.</p>
-            <div className="footer-socials">
-              <a href="#" aria-label="LinkedIn">in</a>
-              <a href="#" aria-label="Twitter">𝕏</a>
-              <a href="#" aria-label="Instagram">IG</a>
-            </div>
-          </div>
-          <div>
-            <h4>Services</h4>
-            <ul>
-              {serviceItems.map((s) => (
-                <li key={s.title}><a href="#services">{s.title}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4>Company</h4>
-            <ul>
-              <li><a href="#about">About DBG</a></li>
-              <li><a href="#packages">Packages</a></li>
-              <li><a href="https://www.rapiddigitalgrowth.com/blogs" target="_blank" rel="noreferrer">Blogs</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Get in Touch</h4>
-            <p>info@digitalbrandsgrowth.com</p>
-            <p>+91 83681 23312</p>
-            <a className="btn btn-ghost footer-cta" href="#contact">
-              Free Consultation
-            </a>
-          </div>
-        </div>
-        <div className="container footer-bottom">
-          <p>© {currentYear} Digital Brands Growth. All rights reserved.</p>
-          <a href="#home">↑ Back to top</a>
-        </div>
-      </footer>
-    </div>
+        <footer className="site-footer">
+          <span>DBG © {year}</span>
+          <span>Premium digital experiences for ambitious brands.</span>
+        </footer>
+      </div>
+    </>
   );
 }
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function WhyChooseUsSection() {
   return (
     <section className="why-choose section reveal-on-scroll">

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ServiceImageCard({ title, description, image, alt }) {
   return (
     <article className="service-image-card">
