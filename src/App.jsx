@@ -12,7 +12,6 @@ const content = text && typeof text === "object" ? text : {};
 const asArray = (value) => (Array.isArray(value) ? value : []);
 const asObject = (value) => (value && typeof value === "object" && !Array.isArray(value) ? value : {});
 const asText = (value) => (typeof value === "string" || typeof value === "number" ? String(value) : "");
-const asTheme = (value) => (value === "dark" || value === "light" ? value : "light");
 const asButtonVariant = (value) => (value === "primary" ? "primary" : "ghost");
 const sectionId = (value) => asText(value);
 
@@ -32,13 +31,34 @@ const contact = asObject(content.contact);
 function usePageMotion(loaderDone) {
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.08, smoothWheel: true, wheelMultiplier: 0.9 });
+    const scrollToAnchor = (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const hash = link.getAttribute("href");
+      if (!hash || hash === "#") return;
+
+      const target = document.querySelector(hash);
+      if (!target) return;
+
+      event.preventDefault();
+      lenis.scrollTo(target, {
+        offset: -96,
+        duration: 1.15,
+        onComplete: () => window.history.replaceState(null, "", hash),
+      });
+    };
+
     let frameId;
     const raf = (time) => {
       lenis.raf(time);
       frameId = requestAnimationFrame(raf);
     };
     frameId = requestAnimationFrame(raf);
+    document.addEventListener("click", scrollToAnchor);
+
     return () => {
+      document.removeEventListener("click", scrollToAnchor);
       cancelAnimationFrame(frameId);
       lenis.destroy();
     };
@@ -119,10 +139,10 @@ function ActionLink({ action }) {
   );
 }
 
-function LoadingScreen({ done, theme }) {
+function LoadingScreen({ done }) {
   return (
     <motion.div
-      className={`loader ${theme === "light" ? "loader-light" : ""}`}
+      className="loader loader-light"
       initial={{ opacity: 1 }}
       animate={{ opacity: done ? 0 : 1, pointerEvents: done ? "none" : "auto" }}
       transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
@@ -152,7 +172,6 @@ function LoadingScreen({ done, theme }) {
 
 function App() {
   const [loaderDone, setLoaderDone] = useState(false);
-  const [theme, setTheme] = useState(asTheme(site.defaultTheme));
   const year = new Date().getFullYear();
   const cursorRef = useRef(null);
 
@@ -176,18 +195,21 @@ function App() {
   const brandShort = asText(site.brandShort);
   const brandName = asText(site.brandName);
   const navItems = asArray(navigation.items);
-  const themeToggle = asObject(navigation.themeToggle);
   const navigationCta = asObject(navigation.cta);
 
   return (
     <>
-      <LoadingScreen done={loaderDone} theme={theme} />
+      <LoadingScreen done={loaderDone} />
       <div className="custom-cursor" ref={cursorRef} aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
-      <div className={`site-shell theme-${theme}`}>
+      <div className="site-shell">
         <header className="site-header">
           <a className="brand" href={asText(site.homeHref) || "#"} aria-label={asText(site.brandAriaLabel)}>
-            <span>{brandShort}</span>
+            <img
+              className="brand-logo"
+              src="/logo.png"
+              alt={`${brandName || "Logo"} logo`}
+            />
             <strong>{brandName}</strong>
           </a>
           <nav aria-label={asText(navigation.ariaLabel)}>
@@ -203,13 +225,6 @@ function App() {
             })}
           </nav>
           <div className="header-actions">
-            <button
-              className="theme-toggle"
-              type="button"
-              onClick={() => setTheme((value) => (value === "light" ? "dark" : "light"))}
-            >
-              {theme === "light" ? asText(themeToggle.lightLabel) : asText(themeToggle.darkLabel)}
-            </button>
             <a className="nav-cta" href={asText(navigationCta.href) || "#"}>
               {asText(navigationCta.label)}
             </a>

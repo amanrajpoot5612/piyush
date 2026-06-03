@@ -1,6 +1,5 @@
 {
   "site": {
-    "defaultTheme": "light",
     "brandShort": "DBG",
     "brandName": "Digital Brands Growth",
     "brandAriaLabel": "DBG home",
@@ -25,10 +24,6 @@
     "cta": {
       "label": "Let's Talk",
       "href": "#contact"
-    },
-    "themeToggle": {
-      "lightLabel": "Dark",
-      "darkLabel": "Light"
     }
   },
   "loader": {
