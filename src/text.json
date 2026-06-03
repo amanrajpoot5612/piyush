@@ -1,0 +1,221 @@
+{
+  "site": {
+    "defaultTheme": "light",
+    "brandShort": "DBG",
+    "brandName": "Digital Brands Growth",
+    "brandAriaLabel": "DBG home",
+    "homeHref": "#home",
+    "footerPrefix": "DBG",
+    "footerYearSeparator": "©",
+    "footerText": "Digital Brands Growth"
+  },
+  "media": {
+      "heroVideo": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1780515539/DBG_video_azstnz.mp4",
+    "videoType": "video/mp4"
+  },
+  "navigation": {
+    "ariaLabel": "Primary navigation",
+    "items": [
+      { "label": "Services", "href": "#services" },
+      { "label": "Work", "href": "#work" },
+      { "label": "Process", "href": "#process" },
+      { "label": "About", "href": "#about" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "cta": {
+      "label": "Let's Talk",
+      "href": "#contact"
+    },
+    "themeToggle": {
+      "lightLabel": "Dark",
+      "darkLabel": "Light"
+    }
+  },
+  "loader": {
+    "logo": "DBG"
+  },
+  "hero": {
+    "id": "home",
+    "eyebrow": "Digital Marketing Agency in India",
+    "headlineLines": ["Building Digital", "Experiences That", "Drive Growth"],
+    "subtitle": "We design and develop high-performance websites, applications, and digital products for ambitious brands.",
+    "actions": [
+      { "label": "Start a Project", "href": "#contact", "variant": "primary" },
+      { "label": "View Our Work", "href": "#work", "variant": "ghost" }
+    ],
+    "video": {
+      "title": "Growth Studio Reel",
+      "caption": "Landscape brand video",
+      "captionStrong": "Strategy + Design + Marketing"
+    },
+    "meta": ["SEO", "Website Design", "Social Media", "Paid Ads"]
+  },
+  "services": {
+    "id": "services",
+    "eyebrow": "What We Do",
+    "heading": "Boost your brand with expert digital marketing services.",
+    "items": [
+      {
+        "number": "01",
+        "title": "Website Design",
+        "copy": "Responsive, SEO-ready websites with modern layouts, fast loading, and clean brand storytelling.",
+        "points": [
+          "Mobile-first design",
+          "CMS-ready structure",
+          "Conversion sections"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "SEO Services",
+        "copy": "Technical, local, and content-led SEO programs designed to increase search visibility and qualified traffic.",
+        "points": ["Website audits", "Keyword strategy", "On-page optimization"]
+      },
+      {
+        "number": "03",
+        "title": "Social Marketing",
+        "copy": "Platform-specific social campaigns that build audience trust and make your brand visible every week.",
+        "points": [
+          "Content calendars",
+          "Creative direction",
+          "Community growth"
+        ]
+      },
+      {
+        "number": "04",
+        "title": "Paid Ads",
+        "copy": "Google, Meta, and marketplace campaigns built around ROI, audience segmentation, and testing.",
+        "points": ["Funnel setup", "Creative testing", "Budget optimization"]
+      },
+      {
+        "number": "05",
+        "title": "Website Design",
+        "copy": "Responsive, SEO-ready websites with modern layouts, fast loading, and clean brand storytelling.",
+        "points": [
+          "Mobile-first design",
+          "CMS-ready structure",
+          "Conversion sections"
+        ]
+      },
+      {
+        "number": "06",
+        "title": "Website Design",
+        "copy": "Responsive, SEO-ready websites with modern layouts, fast loading, and clean brand storytelling.",
+        "points": [
+          "Mobile-first design",
+          "CMS-ready structure",
+          "Conversion sections"
+        ]
+      }
+    ]
+  },
+  "work": {
+    "id": "work",
+    "eyebrow": "Featured Case Studies",
+    "heading": "Professional campaigns presented with a premium agency finish.",
+    "items": [
+      {
+        "title": "Healthcare Growth",
+        "type": "Local SEO + website redesign",
+        "metric": "+68% qualified calls"
+      },
+      {
+        "title": "Restaurant Launch",
+        "type": "Social content + paid ads",
+        "metric": "4.2x return on ad spend"
+      },
+      {
+        "title": "Real Estate Funnel",
+        "type": "Landing pages + Google Ads",
+        "metric": "+132% lead volume"
+      }
+    ]
+  },
+  "process": {
+    "id": "process",
+    "eyebrow": "Company Process",
+    "heading": "From digital strategy to measurable growth.",
+    "items": [
+      {
+        "number": "01",
+        "title": "Research",
+        "copy": "We study your category, competitors, customers, and existing digital performance."
+      },
+      {
+        "number": "02",
+        "title": "Strategy",
+        "copy": "We map the website, campaign plan, SEO priorities, and conversion journey."
+      },
+      {
+        "number": "03",
+        "title": "Build",
+        "copy": "We design, develop, write, optimize, and launch with polished execution."
+      },
+      {
+        "number": "04",
+        "title": "Scale",
+        "copy": "We track results, improve campaigns, and keep growth moving with clear reporting."
+      }
+    ]
+  },
+  "testimonials": {
+    "items": [
+      {
+        "quote": "The website finally looks like a serious business asset. It is clean, fast, and much easier for clients to trust.",
+        "name": "Piyush Vashisth",
+        "role": "Founder, Maison Labs"
+      },
+      {
+        "quote": "Their team gave us the strategy, creatives, and campaign structure we were missing.",
+        "name": "Arjun Mehta",
+        "role": "Director, Northstar Cloud"
+      },
+      {
+        "quote": "The blue and white design feels premium but still approachable for our customers.",
+        "name": "Nisha Rao",
+        "role": "Marketing Lead, Elevate"
+      }
+    ]
+  },
+  "stats": {
+    "ariaLabel": "Agency statistics",
+    "initialValue": "0",
+    "items": [
+      { "value": "50", "label": "Happy Clients", "suffix": "+" },
+      { "value": "70", "label": "Average ROI", "suffix": "%" },
+      { "value": "8", "label": "Years Experience", "suffix": "+" },
+      { "value": "4", "label": "Traffic Growth", "suffix": "x" }
+    ]
+  },
+  "about": {
+    "id": "about",
+    "eyebrow": "Welcome to DBG",
+    "heading": "Shaping digital journeys with a passionate growth agency.",
+    "copy": "We blend creativity, technology, SEO, social media, paid campaigns, and website development to help businesses build trust and grow with clarity. The layout is light, polished, and blue-led like a modern dbg-style agency page, while still keeping the premium studio energy.",
+    "tags": [
+      "Hospitals",
+      "Restaurants",
+      "Education",
+      "Real Estate",
+      "E-Commerce"
+    ]
+  },
+  "contact": {
+    "id": "contact",
+    "eyebrow": "Let's Build Together",
+    "heading": "Ready to launch a cleaner, faster, more premium digital presence?",
+    "copy": "Projects can be shaped for practical growth packages or premium custom builds from Rs 50,000 to Rs 5,00,000+.",
+    "actions": [
+      {
+        "label": "Start a Project",
+        "href": "mailto:info@digitalbrandsgrowth.com",
+        "variant": "primary"
+      },
+      {
+        "label": "+91 83681 23312",
+        "href": "tel:+918368123312",
+        "variant": "ghost"
+      }
+    ]
+  }
+}
