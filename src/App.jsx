@@ -10,8 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const content = text && typeof text === "object" ? text : {};
 const asArray = (value) => (Array.isArray(value) ? value : []);
-const asObject = (value) => (value && typeof value === "object" && !Array.isArray(value) ? value : {});
-const asText = (value) => (typeof value === "string" || typeof value === "number" ? String(value) : "");
+const asObject = (value) =>
+  value && typeof value === "object" && !Array.isArray(value) ? value : {};
+const asText = (value) =>
+  typeof value === "string" || typeof value === "number" ? String(value) : "";
 const asButtonVariant = (value) => (value === "primary" ? "primary" : "ghost");
 const sectionId = (value) => asText(value);
 
@@ -30,7 +32,11 @@ const contact = asObject(content.contact);
 
 function usePageMotion(loaderDone) {
   useEffect(() => {
-    const lenis = new Lenis({ duration: 1.08, smoothWheel: true, wheelMultiplier: 0.9 });
+    const lenis = new Lenis({
+      duration: 1.08,
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+    });
     const scrollToAnchor = (event) => {
       const link = event.target.closest('a[href^="#"]');
       if (!link) return;
@@ -204,7 +210,11 @@ function App() {
       <div className="grain" aria-hidden="true" />
       <div className="site-shell">
         <header className="site-header">
-          <a className="brand" href={asText(site.homeHref) || "#"} aria-label={asText(site.brandAriaLabel)}>
+          <a
+            className="brand"
+            href={asText(site.homeHref) || "#"}
+            aria-label={asText(site.brandAriaLabel)}
+          >
             <img
               className="brand-logo"
               src="/logo.png"
@@ -258,7 +268,10 @@ function App() {
                 transition={{ delay: 0.42, duration: 0.85 }}
               >
                 {asArray(hero.actions).map((action, index) => (
-                  <ActionLink action={action} key={`${asText(asObject(action).label)}-${index}`} />
+                  <ActionLink
+                    action={action}
+                    key={`${asText(asObject(action).label)}-${index}`}
+                  />
                 ))}
               </motion.div>
             </div>
@@ -267,7 +280,11 @@ function App() {
               className="video-card"
               initial={{ opacity: 0, y: 38, scale: 0.96 }}
               animate={loaderDone ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: 0.32, duration: 1, ease: [0.2, 0.8, 0.2, 1] }}
+              transition={{
+                delay: 0.32,
+                duration: 1,
+                ease: [0.2, 0.8, 0.2, 1],
+              }}
             >
               <div className="video-toolbar">
                 <span />
@@ -293,7 +310,10 @@ function App() {
             </div>
           </section>
 
-          <section id={sectionId(services.id)} className="section services-section">
+          <section
+            id={sectionId(services.id)}
+            className="section services-section"
+          >
             <div className="section-heading gsap-reveal">
               <p className="eyebrow">{asText(services.eyebrow)}</p>
               <h2>{asText(services.heading)}</h2>
@@ -303,13 +323,18 @@ function App() {
                 const item = asObject(service);
                 const title = asText(item.title);
                 return (
-                  <article className="glass-card service-card gsap-reveal" key={`${title}-${index}`}>
+                  <article
+                    className="glass-card service-card gsap-reveal"
+                    key={`${title}-${index}`}
+                  >
                     <span>{asText(item.number)}</span>
                     <h3>{title}</h3>
                     <p>{asText(item.copy)}</p>
                     <ul>
                       {asArray(item.points).map((point, pointIndex) => (
-                        <li key={`${asText(point)}-${pointIndex}`}>{asText(point)}</li>
+                        <li key={`${asText(point)}-${pointIndex}`}>
+                          {asText(point)}
+                        </li>
                       ))}
                     </ul>
                   </article>
@@ -328,7 +353,10 @@ function App() {
                 const item = asObject(project);
                 const title = asText(item.title);
                 return (
-                  <article className="case-card gsap-reveal" key={`${title}-${index}`}>
+                  <article
+                    className="case-card gsap-reveal"
+                    key={`${title}-${index}`}
+                  >
                     <div className="case-visual">
                       <video autoPlay muted loop playsInline>
                         <VideoSource />
@@ -347,7 +375,10 @@ function App() {
             </div>
           </section>
 
-          <section id={sectionId(processSection.id)} className="section process-section">
+          <section
+            id={sectionId(processSection.id)}
+            className="section process-section"
+          >
             <div className="section-heading gsap-reveal">
               <p className="eyebrow">{asText(processSection.eyebrow)}</p>
               <h2>{asText(processSection.heading)}</h2>
@@ -357,7 +388,10 @@ function App() {
                 const item = asObject(step);
                 const title = asText(item.title);
                 return (
-                  <article className="timeline-item gsap-reveal" key={`${title}-${index}`}>
+                  <article
+                    className="timeline-item gsap-reveal"
+                    key={`${title}-${index}`}
+                  >
                     <span>{asText(item.number)}</span>
                     <h3>{title}</h3>
                     <p>{asText(item.copy)}</p>
@@ -385,7 +419,10 @@ function App() {
             </div>
           </section>
 
-          <section className="stats-section gsap-reveal" aria-label={asText(stats.ariaLabel)}>
+          <section
+            className="stats-section gsap-reveal"
+            aria-label={asText(stats.ariaLabel)}
+          >
             {asArray(stats.items).map((stat, index) => {
               const item = asObject(stat);
               const label = asText(item.label);
@@ -429,7 +466,10 @@ function App() {
               <p>{asText(contact.copy)}</p>
               <div className="contact-actions">
                 {asArray(contact.actions).map((action, index) => (
-                  <ActionLink action={action} key={`${asText(asObject(action).label)}-${index}`} />
+                  <ActionLink
+                    action={action}
+                    key={`${asText(asObject(action).label)}-${index}`}
+                  />
                 ))}
               </div>
             </div>
@@ -438,7 +478,8 @@ function App() {
 
         <footer className="site-footer">
           <span>
-            {asText(site.footerPrefix)} {asText(site.footerYearSeparator)} {year}
+            {asText(site.footerPrefix)} {asText(site.footerYearSeparator)}{" "}
+            {year}
           </span>
           <span>{asText(site.footerText)}</span>
         </footer>
