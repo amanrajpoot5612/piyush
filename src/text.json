@@ -2,27 +2,27 @@
   "site": {
     "brandShort": "DBG",
     "brandName": "Digital Brands Growth",
-    "brandAriaLabel": "DBG home",
+    "brandAriaLabel": "Digital Brands Growth home",
     "homeHref": "#home",
-    "footerPrefix": "DBG",
+    "footerPrefix": "Digital Brands Growth",
     "footerYearSeparator": "©",
     "footerText": "Digital Brands Growth"
   },
   "media": {
-      "heroVideo": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1780515539/DBG_video_azstnz.mp4",
+    "heroVideo": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1780515539/DBG_video_azstnz.mp4",
     "videoType": "video/mp4"
   },
   "navigation": {
     "ariaLabel": "Primary navigation",
     "items": [
       { "label": "Services", "href": "#services" },
-      { "label": "Work", "href": "#work" },
+      { "label": "Portfolio", "href": "#work" },
       { "label": "Process", "href": "#process" },
       { "label": "About", "href": "#about" },
       { "label": "Contact", "href": "#contact" }
     ],
     "cta": {
-      "label": "Let's Talk",
+      "label": "Let\u2019s Talk",
       "href": "#contact"
     }
   },
@@ -31,105 +31,122 @@
   },
   "hero": {
     "id": "home",
-    "eyebrow": "Digital Marketing Agency in India",
-    "headlineLines": ["Building Digital", "Experiences That", "Drive Growth"],
-    "subtitle": "We design and develop high-performance websites, applications, and digital products for ambitious brands.",
+    "eyebrow": "We Don\u2019t Just Market Brands",
+    "headlineLines": [
+      "We Build Growth.",
+      "BUILDING BRANDS THAT",
+      "DOMINATE"
+    ],
+    "subtitle": "Strategy, creativity, performance—all focused on one thing: your growth.",
     "actions": [
       { "label": "Start a Project", "href": "#contact", "variant": "primary" },
       { "label": "View Our Work", "href": "#work", "variant": "ghost" }
     ],
     "video": {
       "title": "Growth Studio Reel",
-      "caption": "Landscape brand video",
-      "captionStrong": "Strategy + Design + Marketing"
+      "caption": "Digital strategy story",
+      "captionStrong": "Strategy + Creativity + Performance"
     },
-    "meta": ["SEO", "Website Design", "Social Media", "Paid Ads"]
+    "meta": [
+      "Brand Growth",
+      "SEO",
+      "Social Media",
+      "Website Design"
+    ]
   },
   "services": {
     "id": "services",
-    "eyebrow": "What We Do",
-    "heading": "Boost your brand with expert digital marketing services.",
+    "eyebrow": "Our Services",
+    "heading": "Digital marketing solutions designed for growth.",
     "items": [
       {
         "number": "01",
-        "title": "Website Design",
-        "copy": "Responsive, SEO-ready websites with modern layouts, fast loading, and clean brand storytelling.",
+        "title": "SEO (Search Engine Optimization)",
+        "copy": "Improve your website ranking on Google and generate organic traffic.",
         "points": [
-          "Mobile-first design",
-          "CMS-ready structure",
-          "Conversion sections"
+          "Website ranking improvement",
+          "Organic traffic growth",
+          "SEO audits and optimization"
         ]
       },
       {
         "number": "02",
-        "title": "SEO Services",
-        "copy": "Technical, local, and content-led SEO programs designed to increase search visibility and qualified traffic.",
-        "points": ["Website audits", "Keyword strategy", "On-page optimization"]
+        "title": "SMO (Social Media Optimization)",
+        "copy": "Build a strong social media presence and audience engagement.",
+        "points": [
+          "Profile optimization",
+          "Content planning",
+          "Engagement strategy"
+        ]
       },
       {
         "number": "03",
-        "title": "Social Marketing",
-        "copy": "Platform-specific social campaigns that build audience trust and make your brand visible every week.",
+        "title": "SMM (Social Media Marketing)",
+        "copy": "Create high-converting social campaigns that increase reach and sales.",
         "points": [
-          "Content calendars",
-          "Creative direction",
-          "Community growth"
+          "Brand awareness campaigns",
+          "Lead generation campaigns",
+          "Retargeting campaigns"
         ]
       },
       {
         "number": "04",
-        "title": "Paid Ads",
-        "copy": "Google, Meta, and marketplace campaigns built around ROI, audience segmentation, and testing.",
-        "points": ["Funnel setup", "Creative testing", "Budget optimization"]
+        "title": "Google Ads",
+        "copy": "Generate instant traffic and qualified leads through Google Ads.",
+        "points": [
+          "Search ads",
+          "Display ads",
+          "YouTube and local campaigns"
+        ]
       },
       {
         "number": "05",
-        "title": "Website Design",
-        "copy": "Responsive, SEO-ready websites with modern layouts, fast loading, and clean brand storytelling.",
+        "title": "Offline Marketing",
+        "copy": "Connect your brand with customers through impactful offline promotions.",
         "points": [
-          "Mobile-first design",
-          "CMS-ready structure",
-          "Conversion sections"
+          "Pamphlet distribution",
+          "Newspaper ads",
+          "Hoardings and banners"
         ]
       },
       {
         "number": "06",
         "title": "Website Design",
-        "copy": "Responsive, SEO-ready websites with modern layouts, fast loading, and clean brand storytelling.",
+        "copy": "Modern, responsive, and conversion-focused websites for your business.",
         "points": [
-          "Mobile-first design",
-          "CMS-ready structure",
-          "Conversion sections"
+          "Modern UI/UX",
+          "Fast loading",
+          "Mobile responsive"
         ]
       }
     ]
   },
   "work": {
     "id": "work",
-    "eyebrow": "Featured Case Studies",
-    "heading": "Professional campaigns presented with a premium agency finish.",
+    "eyebrow": "Portfolio",
+    "heading": "Designing brand experiences that communicate your value.",
     "items": [
       {
-        "title": "Healthcare Growth",
-        "type": "Local SEO + website redesign",
-        "metric": "+68% qualified calls"
+        "title": "Portfolio Designing",
+        "type": "Professional portfolio showcase",
+        "metric": "Attracts the right clients"
       },
       {
-        "title": "Restaurant Launch",
-        "type": "Social content + paid ads",
-        "metric": "4.2x return on ad spend"
+        "title": "Visiting Card Designing",
+        "type": "Premium visiting card design",
+        "metric": "Creates a strong first impression"
       },
       {
-        "title": "Real Estate Funnel",
-        "type": "Landing pages + Google Ads",
-        "metric": "+132% lead volume"
+        "title": "Business Websites",
+        "type": "Modern responsive websites",
+        "metric": "Builds trust and credibility"
       }
     ]
   },
   "process": {
     "id": "process",
-    "eyebrow": "Company Process",
-    "heading": "From digital strategy to measurable growth.",
+    "eyebrow": "Our Growth Philosophy",
+    "heading": "A performance-driven marketing approach for sustainable growth.",
     "items": [
       {
         "number": "01",
@@ -184,33 +201,95 @@
   },
   "about": {
     "id": "about",
-    "eyebrow": "Welcome to DBG",
-    "heading": "Shaping digital journeys with a passionate growth agency.",
-    "copy": "We blend creativity, technology, SEO, social media, paid campaigns, and website development to help businesses build trust and grow with clarity. The layout is light, polished, and blue-led like a modern dbg-style agency page, while still keeping the premium studio energy.",
+    "eyebrow": "Founder’s Introduction",
+    "heading": "Hi, I’m Piyush Vashisht, Founder & CEO of Digital Brands Growth.",
+    "copy": "I started Digital Brands Growth with a vision to help businesses build a strong digital presence and grow through creative marketing strategies. With a passion for branding, business growth, and digital innovation, I focus on creating impactful marketing solutions that help brands connect with the right audience and achieve real results. At Digital Brands Growth, we specialize in social media marketing, branding, content creation, promotions, and business growth strategies designed to increase visibility and customer engagement. I believe that successful marketing is not only about promotion — it's about building trust, creating value, and establishing long-term relationships between brands and customers.",
     "tags": [
-      "Hospitals",
-      "Restaurants",
-      "Education",
-      "Real Estate",
-      "E-Commerce"
+      "Startups",
+      "Local Businesses",
+      "Growing Brands",
+      "Branding",
+      "Digital Innovation"
     ]
   },
   "contact": {
     "id": "contact",
-    "eyebrow": "Let's Build Together",
-    "heading": "Ready to launch a cleaner, faster, more premium digital presence?",
-    "copy": "Projects can be shaped for practical growth packages or premium custom builds from Rs 50,000 to Rs 5,00,000+.",
+    "eyebrow": "CONTACT US",
+    "heading": "Ready to build a growth-focused digital presence?",
+    "copy": "Reach out to start a creative marketing plan that increases visibility, engagement, and business growth.",
     "actions": [
-      {
-        "label": "Start a Project",
-        "href": "mailto:info@digitalbrandsgrowth.com",
-        "variant": "primary"
-      },
-      {
-        "label": "+91 83681 23312",
-        "href": "tel:+918368123312",
-        "variant": "ghost"
-      }
+      { "label": "Email Us", "href": "mailto:info@digitalbrandsgrowth.com", "variant": "primary" },
+      { "label": "+91 9289223227", "href": "tel:+919289223227", "variant": "ghost" }
     ]
+  },
+  "extra": {
+    "mission": "Empower brands with smart digital solutions and deliver measurable, sustainable growth.",
+    "vision": "Become a trusted growth partner for businesses worldwide by building impactful online and offline brand presence.",
+    "philosophy": [
+      "Build a strong and impactful digital presence across all major platforms",
+      "Generate high-quality leads and drive consistent business sales growth",
+      "Increase brand awareness through creative and strategic marketing campaigns",
+      "Deliver measurable ROI with performance-focused marketing solutions",
+      "Create long-term customer trust, loyalty, and strong brand relationships"
+    ],
+    "serviceCatalog": {
+      "seo": "Improve your website ranking on Google and generate organic traffic.",
+      "smo": "Build a strong social media presence and audience engagement.",
+      "smm": "Create high-converting social campaigns that increase reach and sales.",
+      "googleAds": "Generate instant traffic and qualified leads through Google Ads.",
+      "offlineMarketing": "Connect your brand with customers through impactful offline promotions.",
+      "websiteDesign": "Modern, responsive, and conversion-focused websites for your business."
+    },
+    "portfolioDesigning": "It helps the company attract more clients by professionally showcasing its work and expertise.",
+    "visitingCardDesigning": "It helps you create a strong first impression and share contact details professionally with potential clients.",
+    "whatWeOffer": [
+      "On-Page SEO",
+      "Technical SEO",
+      "Keyword Research",
+      "Local SEO",
+      "SEO Audits",
+      "Link Building",
+      "Monthly SEO Reports"
+    ],
+    "resultsExpected": [
+      "Higher Google Rankings",
+      "More Organic Traffic",
+      "Better Website Authority",
+      "Increased Leads & Sales"
+    ],
+    "platforms": [
+      "Instagram",
+      "Facebook",
+      "LinkedIn",
+      "Twitter/X",
+      "YouTube"
+    ],
+    "digitalCapabilities": [
+      "Personal branding sites",
+      "Portfolio websites",
+      "Landing pages",
+      "E-commerce websites",
+      "Business websites"
+    ],
+    "offlineFeatures": [
+      "Pamphlet distribution",
+      "Newspaper ads",
+      "Hoardings & banners",
+      "Local promotions",
+      "Event branding"
+    ],
+    "companyStrengths": [
+      "Creative & performance-driven team with result-oriented marketing strategies",
+      "Affordable & cost-effective marketing solutions",
+      "Customized growth plans for every business",
+      "Transparent reporting & performance tracking with dedicated client support",
+      "Remote work model that reduces unnecessary operational costs"
+    ],
+    "whyChoose": "By working remotely, our team saves on office overhead expenses, allowing us to deliver high-quality marketing services at more affordable pricing without compromising on quality or performance.",
+    "contactDetails": {
+      "website": "www.digitalbrandsgrowth.com",
+      "email": "info@digitalbrandsgrowth.com",
+      "phone": "+91 9289223227"
+    }
   }
 }
