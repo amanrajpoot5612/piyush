@@ -138,6 +138,39 @@ function usePageMotion(loaderDone) {
         });
       });
 
+      gsap.fromTo(
+        ".roadmap-progress",
+        { strokeDashoffset: 1 },
+        {
+          strokeDashoffset: 0,
+          duration: 1.35,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".roadmap",
+            start: "top 76%",
+          },
+        },
+      );
+
+      gsap.utils.toArray(".roadmap-step").forEach((item, index) => {
+        gsap.fromTo(
+          item,
+          { y: 34, opacity: 0, scale: 0.94 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            delay: index * 0.08,
+            ease: "back.out(1.25)",
+            scrollTrigger: {
+              trigger: ".roadmap",
+              start: "top 74%",
+            },
+          },
+        );
+      });
+
       gsap.to(".video-card", {
         yPercent: -8,
         ease: "none",
@@ -485,18 +518,52 @@ function App() {
               <p className="eyebrow">{asText(processSection.eyebrow)}</p>
               <h2>{renderMarkedText(processSection.heading)}</h2>
             </div>
-            <div className="timeline">
+            <div className="roadmap" aria-label="Growth process roadmap">
+              <svg
+                className="roadmap-path"
+                viewBox="0 0 820 560"
+                aria-hidden="true"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <linearGradient
+                    id="roadmapGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stopColor="#22c6ff" />
+                    <stop offset="52%" stopColor="#0a7cff" />
+                    <stop offset="100%" stopColor="#0756c9" />
+                  </linearGradient>
+                </defs>
+                <path
+                  className="roadmap-path-base"
+                  d="M90 90 C330 20 480 210 720 130 C520 230 350 285 150 260 C360 400 560 345 730 470"
+                  pathLength="1"
+                />
+                <path
+                  className="roadmap-progress"
+                  d="M90 90 C330 20 480 210 720 130 C520 230 350 285 150 260 C360 400 560 345 730 470"
+                  pathLength="1"
+                />
+              </svg>
               {asArray(processSection.items).map((step, index) => {
                 const item = asObject(step);
                 const title = asText(item.title);
                 return (
                   <article
-                    className="timeline-item gsap-reveal"
+                    className="roadmap-step"
+                    style={{ "--step-index": index }}
                     key={`${title}-${index}`}
                   >
-                    <span>{asText(item.number)}</span>
-                    <h3>{title}</h3>
-                    <p>{asText(item.copy)}</p>
+                    <span className="roadmap-node">{asText(item.number)}</span>
+                    <div className="roadmap-card">
+                      <p>Phase {asText(item.number)}</p>
+                      <h3>{title}</h3>
+                      <span>{asText(item.copy)}</span>
+                    </div>
                   </article>
                 );
               })}
