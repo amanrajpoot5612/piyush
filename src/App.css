@@ -18,7 +18,11 @@
   /* Heading Gradient Palette */
   --gradient-heading-light: linear-gradient(135deg, #b3e5fc 0%, #81d4fa 100%);
   --gradient-heading-medium: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
-  --gradient-heading-standard: linear-gradient(135deg, #0a7cff 0%, #0756c9 100%);
+  --gradient-heading-standard: linear-gradient(
+    135deg,
+    #0a7cff 0%,
+    #0756c9 100%
+  );
   --gradient-heading-dark: linear-gradient(135deg, #0a5ba8 0%, #062c5c 100%);
   --gradient-eyebrow: linear-gradient(90deg, #22c6ff 0%, #0a7cff 100%);
 }
