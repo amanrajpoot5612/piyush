@@ -17,6 +17,34 @@ const asText = (value) =>
 const asButtonVariant = (value) => (value === "primary" ? "primary" : "ghost");
 const sectionId = (value) => asText(value);
 
+const renderMarkedText = (value) => {
+  const text = asText(value);
+  if (!text.includes("**")) return text;
+
+  const parts = [];
+  const pattern = /\*\*(.+?)\*\*/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push(
+      <span className="highlight" key={`${match[1]}-${match.index}`}>
+        {match[1]}
+      </span>,
+    );
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+};
+
 const site = asObject(content.site);
 const media = asObject(content.media);
 const navigation = asObject(content.navigation);
@@ -126,10 +154,15 @@ function usePageMotion(loaderDone) {
   }, [loaderDone]);
 }
 
-function VideoSource() {
-  const src = asText(media.heroVideo);
+function VideoSource({ src: source, type } = {}) {
+  const src = asText(source) || asText(media.heroVideo);
   if (!src) return null;
-  return <source src={src} type={asText(media.videoType) || undefined} />;
+  return (
+    <source
+      src={src}
+      type={asText(type) || asText(media.videoType) || undefined}
+    />
+  );
 }
 
 function ActionLink({ action }) {
@@ -163,7 +196,10 @@ function LoadingScreen({ done }) {
         animate={{ clipPath: "inset(0 0% 0 0)" }}
         transition={{ duration: 1.05, ease: [0.76, 0, 0.24, 1] }}
       >
-        {asText(loader.logo)}
+        <img
+          src={asText(site.logo) || "/logo.png"}
+          alt={`${asText(site.brandName) || "Company"} logo`}
+        />
       </motion.div>
       <div className="loader-progress">
         <motion.span
@@ -202,6 +238,9 @@ function App() {
   const brandName = asText(site.brandName);
   const navItems = asArray(navigation.items);
   const navigationCta = asObject(navigation.cta);
+  const heroBrandLogos = asObject(hero.brandLogos);
+  const marqueeBrandLogos = asArray(heroBrandLogos.marquee);
+  const featuredBrandLogos = asArray(heroBrandLogos.featured).slice(0, 4);
 
   return (
     <>
@@ -217,7 +256,7 @@ function App() {
           >
             <img
               className="brand-logo"
-              src="/logo.png"
+              src={asText(site.logo) || "/logo.png"}
               alt={`${brandName || "Logo"} logo`}
             />
             <strong>{brandName}</strong>
@@ -244,12 +283,44 @@ function App() {
         <main>
           <section id={sectionId(hero.id)} className="hero-section">
             <div className="hero-bg" aria-hidden="true" />
+
+            <motion.div
+              className="video-card"
+              initial={{ opacity: 0, y: 38, scale: 0.96 }}
+              animate={loaderDone ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                delay: 0.32,
+                duration: 1,
+                ease: [0.2, 0.8, 0.2, 1],
+              }}
+            >
+              {/* <div className="video-toolbar">
+                <span />
+                <span />
+                <span />
+                <strong>{asText(asObject(hero.video).title)}</strong>
+              </div> */}
+
+              <video autoPlay muted loop playsInline>
+                <VideoSource />
+              </video>
+
+              {/* Decorative images layered over the video (decorative - aria-hidden) */}
+
+              {/* <div className="video-caption">
+                <span>{asText(asObject(hero.video).caption)}</span>
+                <strong>{asText(asObject(hero.video).captionStrong)}</strong>
+              </div> */}
+            </motion.div>
+
             <div className="hero-content">
               <p className="eyebrow reveal-text">{asText(hero.eyebrow)}</p>
               <h1>
                 {asArray(hero.headlineLines).map((line, index) => (
                   <span className="line-mask" key={`${asText(line)}-${index}`}>
-                    <span className="reveal-text">{asText(line)}</span>
+                    <span className="reveal-text">
+                      {renderMarkedText(line)}
+                    </span>
                   </span>
                 ))}
               </h1>
@@ -276,38 +347,53 @@ function App() {
               </motion.div>
             </div>
 
-            <motion.div
-              className="video-card"
-              initial={{ opacity: 0, y: 38, scale: 0.96 }}
-              animate={loaderDone ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{
-                delay: 0.32,
-                duration: 1,
-                ease: [0.2, 0.8, 0.2, 1],
-              }}
+            {/* <div
+              className="hero-meta"
+              aria-label={asText(heroBrandLogos.marqueeLabel)}
             >
-              <div className="video-toolbar">
-                <span />
-                <span />
-                <span />
-                <strong>{asText(asObject(hero.video).title)}</strong>
-              </div>
-              <div className="video-frame">
-                <video autoPlay muted loop playsInline controls>
-                  <VideoSource />
-                </video>
-              </div>
-              <div className="video-caption">
-                <span>{asText(asObject(hero.video).caption)}</span>
-                <strong>{asText(asObject(hero.video).captionStrong)}</strong>
-              </div>
-            </motion.div>
+              <div className="brand-logo-marquee">
+                <div className="brand-logo-track">
+                  {[...marqueeBrandLogos, ...marqueeBrandLogos].map(
+                    (brand, index) => {
+                      const item = asObject(brand);
+                      const name = asText(item.name);
+                      const logo = asText(item.logo);
+                      if (!logo) return null;
 
-            <div className="hero-meta">
-              {asArray(hero.meta).map((item, index) => (
-                <span key={`${asText(item)}-${index}`}>{asText(item)}</span>
-              ))}
-            </div>
+                      return (
+                        <div
+                          className="brand-logo-tile"
+                          key={`${name || "brand"}-${index}`}
+                        >
+                          <img src={logo} alt={`${name || "Brand"} logo`} />
+                        </div>
+                      );
+                    },
+                  )}
+                </div>
+              </div>
+
+              <div
+                className="brand-logo-static"
+                aria-label={asText(heroBrandLogos.featuredLabel)}
+              >
+                {featuredBrandLogos.map((brand, index) => {
+                  const item = asObject(brand);
+                  const name = asText(item.name);
+                  const logo = asText(item.logo);
+                  if (!logo) return null;
+
+                  return (
+                    <div
+                      className="brand-logo-tile"
+                      key={`${name || "featured-brand"}-${index}`}
+                    >
+                      <img src={logo} alt={`${name || "Brand"} logo`} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div> */}
           </section>
 
           <section
@@ -316,18 +402,28 @@ function App() {
           >
             <div className="section-heading gsap-reveal">
               <p className="eyebrow">{asText(services.eyebrow)}</p>
-              <h2>{asText(services.heading)}</h2>
+              <h2>{renderMarkedText(services.heading)}</h2>
             </div>
-            <div className="services-grid">
+            <div className="services-grid horizontal">
               {asArray(services.items).map((service, index) => {
                 const item = asObject(service);
                 const title = asText(item.title);
+                const imageUrl = asText(item.image);
                 return (
                   <article
                     className="glass-card service-card gsap-reveal"
                     key={`${title}-${index}`}
                   >
                     <span>{asText(item.number)}</span>
+                    {imageUrl ? (
+                      <div className="service-card-image">
+                        <img
+                          src={imageUrl}
+                          alt={asText(item.imageAlt) || `${title} example`}
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : null}
                     <h3>{title}</h3>
                     <p>{asText(item.copy)}</p>
                     <ul>
@@ -346,22 +442,28 @@ function App() {
           <section id={sectionId(work.id)} className="section work-section">
             <div className="section-heading section-heading-wide gsap-reveal">
               <p className="eyebrow">{asText(work.eyebrow)}</p>
-              <h2>{asText(work.heading)}</h2>
+              <h2>{renderMarkedText(work.heading)}</h2>
             </div>
             <div className="case-grid">
               {asArray(work.items).map((project, index) => {
                 const item = asObject(project);
                 const title = asText(item.title);
+                const videoUrl = asText(item.video);
                 return (
                   <article
                     className="case-card gsap-reveal"
                     key={`${title}-${index}`}
                   >
-                    <div className="case-visual">
-                      <video autoPlay muted loop playsInline>
-                        <VideoSource />
-                      </video>
-                    </div>
+                    {videoUrl ? (
+                      <div className="case-visual">
+                        <video autoPlay muted loop playsInline>
+                          <VideoSource
+                            src={videoUrl}
+                            type={asText(item.videoType)}
+                          />
+                        </video>
+                      </div>
+                    ) : null}
                     <div className="case-content">
                       <div>
                         <p>{asText(item.type)}</p>
@@ -381,7 +483,7 @@ function App() {
           >
             <div className="section-heading gsap-reveal">
               <p className="eyebrow">{asText(processSection.eyebrow)}</p>
-              <h2>{asText(processSection.heading)}</h2>
+              <h2>{renderMarkedText(processSection.heading)}</h2>
             </div>
             <div className="timeline">
               {asArray(processSection.items).map((step, index) => {
@@ -441,7 +543,7 @@ function App() {
             })}
           </section>
 
-          <section id={sectionId(about.id)} className="section about-section">
+          {/* <section id={sectionId(about.id)} className="section about-section">
             <div className="about-video gsap-reveal">
               <video autoPlay muted loop playsInline controls>
                 <VideoSource />
@@ -457,12 +559,17 @@ function App() {
                 ))}
               </div>
             </div>
-          </section>
+          </section> */}
 
           <section id={sectionId(contact.id)} className="contact-section">
             <div className="contact-inner gsap-reveal">
+              <img
+                className="contact-logo"
+                src={asText(site.logo) || "/logo.png"}
+                alt={`${brandName || "Company"} logo`}
+              />
               <p className="eyebrow">{asText(contact.eyebrow)}</p>
-              <h2>{asText(contact.heading)}</h2>
+              <h2>{renderMarkedText(contact.heading)}</h2>
               <p>{asText(contact.copy)}</p>
               <div className="contact-actions">
                 {asArray(contact.actions).map((action, index) => (
@@ -477,6 +584,11 @@ function App() {
         </main>
 
         <footer className="site-footer">
+          <img
+            className="footer-logo"
+            src={asText(site.logoWhite) || "/logo-white.png"}
+            alt={`${brandName || "Company"} logo`}
+          />
           <span>
             {asText(site.footerPrefix)} {asText(site.footerYearSeparator)}{" "}
             {year}

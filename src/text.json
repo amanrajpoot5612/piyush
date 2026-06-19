@@ -3,13 +3,15 @@
     "brandShort": "DBG",
     "brandName": "Digital Brands Growth",
     "brandAriaLabel": "Digital Brands Growth home",
+    "logo": "/logo.png",
+    "logoWhite": "/logo-white.png",
     "homeHref": "#home",
     "footerPrefix": "Digital Brands Growth",
     "footerYearSeparator": "©",
     "footerText": "Digital Brands Growth"
   },
   "media": {
-    "heroVideo": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1780515539/DBG_video_azstnz.mp4",
+    "heroVideo": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1781808621/new_jzfw05.mp4",
     "videoType": "video/mp4"
   },
   "navigation": {
@@ -33,8 +35,8 @@
     "id": "home",
     "eyebrow": "We Don\u2019t Just Market Brands",
     "headlineLines": [
-      "We Build Growth.",
-      "BUILDING BRANDS THAT",
+      "We Build **Growth**.",
+      "BUILDING **BRANDS** THAT",
       "DOMINATE"
     ],
     "subtitle": "Strategy, creativity, performance—all focused on one thing: your growth.",
@@ -47,21 +49,65 @@
       "caption": "Digital strategy story",
       "captionStrong": "Strategy + Creativity + Performance"
     },
-    "meta": [
-      "Brand Growth",
-      "SEO",
-      "Social Media",
-      "Website Design"
-    ]
+    "brandLogos": {
+      "marqueeLabel": "Brands we have worked with",
+      "marquee": [
+        {
+          "name": "Brand One",
+          "logo": "/restocare.png"
+        },
+        {
+          "name": "Brand Two",
+          "logo": "/mmr.png"
+        },
+        {
+          "name": "Brand Three",
+          "logo": "/logo.png"
+        },
+        {
+          "name": "Brand Four",
+          "logo": "/logo.png"
+        },
+        {
+          "name": "Brand Five",
+          "logo": "/logo.png"
+        },
+        {
+          "name": "Brand Six",
+          "logo": "/logo.png"
+        }
+      ],
+      "featuredLabel": "Featured collaborations",
+      "featured": [
+        {
+          "name": "Featured Brand One",
+          "logo": "/logo.png"
+        },
+        {
+          "name": "Featured Brand Two",
+          "logo": "/logo.png"
+        },
+        {
+          "name": "Featured Brand Three",
+          "logo": "/logo.png"
+        },
+        {
+          "name": "Featured Brand Four",
+          "logo": "/logo.png"
+        }
+      ]
+    }
   },
   "services": {
     "id": "services",
     "eyebrow": "Our Services",
-    "heading": "Digital marketing solutions designed for growth.",
+    "heading": "Digital marketing **solutions designed** for growth.",
     "items": [
       {
         "number": "01",
-        "title": "SEO (Search Engine Optimization)",
+        "title": "Search Engine Optimization",
+        "image": "https://res.cloudinary.com/dwujwvqkv/image/upload/v1781827699/WhatsApp_Image_2026-06-19_at_5.34.50_AM_rb0wp0.jpg",
+        "imageAlt": "Search Engine Optimization service preview",
         "copy": "Improve your website ranking on Google and generate organic traffic.",
         "points": [
           "Website ranking improvement",
@@ -71,7 +117,9 @@
       },
       {
         "number": "02",
-        "title": "SMO (Social Media Optimization)",
+        "title": "Social Media Optimization",
+        "image": "https://res.cloudinary.com/dwujwvqkv/image/upload/v1781827698/WhatsApp_Image_2026-06-19_at_5.35.50_AM_nduijy.jpg",
+        "imageAlt": "Social Media Optimization service preview",
         "copy": "Build a strong social media presence and audience engagement.",
         "points": [
           "Profile optimization",
@@ -81,7 +129,9 @@
       },
       {
         "number": "03",
-        "title": "SMM (Social Media Marketing)",
+        "title": "Social Media Marketing",
+        "image": "https://res.cloudinary.com/dwujwvqkv/image/upload/v1781827698/WhatsApp_Image_2026-06-19_at_5.35.19_AM_tqbgnu.jpg",
+        "imageAlt": "Social Media Marketing service preview",
         "copy": "Create high-converting social campaigns that increase reach and sales.",
         "points": [
           "Brand awareness campaigns",
@@ -92,31 +142,41 @@
       {
         "number": "04",
         "title": "Google Ads",
+        "image": "https://res.cloudinary.com/dwujwvqkv/image/upload/v1781827698/WhatsApp_Image_2026-06-19_at_5.35.19_AM_tqbgnu.jpg",
+        "imageAlt": "Google Ads service preview",
         "copy": "Generate instant traffic and qualified leads through Google Ads.",
-        "points": [
-          "Search ads",
-          "Display ads",
-          "YouTube and local campaigns"
-        ]
+        "points": ["Search ads", "Display ads", "YouTube and local campaigns"]
       },
       {
         "number": "05",
-        "title": "Offline Marketing",
-        "copy": "Connect your brand with customers through impactful offline promotions.",
+        "title": "AI Voice Agents",
+        "image": "https://res.cloudinary.com/dwujwvqkv/image/upload/v1781827699/WhatsApp_Image_2026-06-19_at_5.37.04_AM_bonlpa.jpg",
+        "imageAlt": "AI Voice Agents service preview",
+        "copy": "AI-powered voice assistants that handle calls, qualify leads, and support customers 24/7.",
         "points": [
-          "Pamphlet distribution",
-          "Newspaper ads",
-          "Hoardings and banners"
+          "24/7 customer support",
+          "Appointment booking & reminders",
+          "Multilingual communication"
         ]
       },
       {
         "number": "06",
         "title": "Website Design",
+        "image": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+        "imageAlt": "Website Design service preview",
         "copy": "Modern, responsive, and conversion-focused websites for your business.",
+        "points": ["Modern UI/UX", "Fast loading", "Mobile responsive"]
+      },
+      {
+        "number": "07",
+        "title": "WhatsApp Automation Services",
+        "image": "https://res.cloudinary.com/dwujwvqkv/image/upload/v1781827698/WhatsApp_Image_2026-06-19_at_5.36.16_AM_izhaz4.jpg",
+        "imageAlt": "WhatsApp Automation Services preview",
+        "copy": "Automate customer conversations and grow your business with intelligent WhatsApp workflows.",
         "points": [
-          "Modern UI/UX",
-          "Fast loading",
-          "Mobile responsive"
+          "Automated customer support",
+          "Custom chatbot development",
+          "Appointment & booking automation"
         ]
       }
     ]
@@ -124,21 +184,27 @@
   "work": {
     "id": "work",
     "eyebrow": "Portfolio",
-    "heading": "Designing brand experiences that communicate your value.",
+    "heading": "Designing brand **experiences** that communicate your value.",
     "items": [
       {
         "title": "Portfolio Designing",
         "type": "Professional portfolio showcase",
+        "video": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1781808579/old_gctwxq.mp4",
+        "videoType": "video/mp4",
         "metric": "Attracts the right clients"
       },
       {
         "title": "Visiting Card Designing",
         "type": "Premium visiting card design",
+        "video": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1781828292/visiting_card_mf7v2n.mp4",
+        "videoType": "video/mp4",
         "metric": "Creates a strong first impression"
       },
       {
         "title": "Business Websites",
         "type": "Modern responsive websites",
+        "video": "https://res.cloudinary.com/dwujwvqkv/video/upload/v1781828273/website_design_shgsb5.mp4",
+        "videoType": "video/mp4",
         "metric": "Builds trust and credibility"
       }
     ]
@@ -146,7 +212,7 @@
   "process": {
     "id": "process",
     "eyebrow": "Our Growth Philosophy",
-    "heading": "A performance-driven marketing approach for sustainable growth.",
+    "heading": "A performance-driven marketing **approach for** sustainable **growth.**",
     "items": [
       {
         "number": "01",
@@ -173,19 +239,19 @@
   "testimonials": {
     "items": [
       {
-        "quote": "The website finally looks like a serious business asset. It is clean, fast, and much easier for clients to trust.",
-        "name": "Piyush Vashisth",
-        "role": "Founder, Maison Labs"
+        "quote": "DBG redesigned our website and strengthened our social media presence, helping us build greater trust with customers online.",
+        "name": "Sanjeev Kumar",
+        "role": "Founder, RestoCare"
       },
       {
-        "quote": "Their team gave us the strategy, creatives, and campaign structure we were missing.",
-        "name": "Arjun Mehta",
-        "role": "Director, Northstar Cloud"
+        "quote": "DBG's AI automation and WhatsApp solutions streamlined lead engagement and reduced manual work significantly.",
+        "name": "Pooja Sharma",
+        "role": "Founder, Pooja Movie Creations"
       },
       {
-        "quote": "The blue and white design feels premium but still approachable for our customers.",
-        "name": "Nisha Rao",
-        "role": "Marketing Lead, Elevate"
+        "quote": "Their blend of AI, automation, and digital marketing helped us improve customer interactions and operate more efficiently.",
+        "name": "Deepak Kumar",
+        "role": "CMO, Avantika Sports Wear, Canada"
       }
     ]
   },
@@ -195,14 +261,14 @@
     "items": [
       { "value": "50", "label": "Happy Clients", "suffix": "+" },
       { "value": "70", "label": "Average ROI", "suffix": "%" },
-      { "value": "8", "label": "Years Experience", "suffix": "+" },
-      { "value": "4", "label": "Traffic Growth", "suffix": "x" }
+      { "value": "6", "label": "Years Experience", "suffix": "+" },
+      { "value": "3", "label": "Traffic Growth", "suffix": "x" }
     ]
   },
   "about": {
     "id": "about",
     "eyebrow": "Founder’s Introduction",
-    "heading": "Hi, I’m Piyush Vashisht, Founder & CEO of Digital Brands Growth.",
+    "heading": "Hi, I’m Piyush Vashisht, Founder & **CEO** of Digital Brands Growth.",
     "copy": "I started Digital Brands Growth with a vision to help businesses build a strong digital presence and grow through creative marketing strategies. With a passion for branding, business growth, and digital innovation, I focus on creating impactful marketing solutions that help brands connect with the right audience and achieve real results. At Digital Brands Growth, we specialize in social media marketing, branding, content creation, promotions, and business growth strategies designed to increase visibility and customer engagement. I believe that successful marketing is not only about promotion — it's about building trust, creating value, and establishing long-term relationships between brands and customers.",
     "tags": [
       "Startups",
@@ -215,11 +281,19 @@
   "contact": {
     "id": "contact",
     "eyebrow": "CONTACT US",
-    "heading": "Ready to build a growth-focused digital presence?",
+    "heading": "Ready to build a growth-focused **digital presence**?",
     "copy": "Reach out to start a creative marketing plan that increases visibility, engagement, and business growth.",
     "actions": [
-      { "label": "Email Us", "href": "mailto:info@digitalbrandsgrowth.com", "variant": "primary" },
-      { "label": "+91 9289223227", "href": "tel:+919289223227", "variant": "ghost" }
+      {
+        "label": "Email Us",
+        "href": "mailto:info@digitalbrandsgrowth.com",
+        "variant": "primary"
+      },
+      {
+        "label": "+91 9289223227",
+        "href": "tel:+919289223227",
+        "variant": "ghost"
+      }
     ]
   },
   "extra": {
@@ -257,13 +331,7 @@
       "Better Website Authority",
       "Increased Leads & Sales"
     ],
-    "platforms": [
-      "Instagram",
-      "Facebook",
-      "LinkedIn",
-      "Twitter/X",
-      "YouTube"
-    ],
+    "platforms": ["Instagram", "Facebook", "LinkedIn", "Twitter/X", "YouTube"],
     "digitalCapabilities": [
       "Personal branding sites",
       "Portfolio websites",
