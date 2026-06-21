@@ -686,14 +686,9 @@ function App() {
                     />
                   ))}
                 </div>
-                <div className="contact-visual" aria-hidden="true">
-                  <img
-                    src="/dbg-logo.svg"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+                {/* <div className="contact-visual" aria-hidden="true">
+                  <img src="/logo.png" alt="" loading="lazy" decoding="async" />
+                </div> */}
               </div>
               <form className="contact-form" onSubmit={handleContactSubmit}>
                 <label>
