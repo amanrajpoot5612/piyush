@@ -1,5 +1,5 @@
 /* Base and reset for Phase 2 */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=switzer@400,500,600,700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -11,7 +11,7 @@ body,
 }
 html {
   font-family:
-    Plus Jakarta Sans,
+    Switzer,
     system-ui,
     -apple-system,
     "Segoe UI",

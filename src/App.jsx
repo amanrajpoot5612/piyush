@@ -55,7 +55,6 @@ const work = asObject(content.work);
 const processSection = asObject(content.process);
 const testimonials = asObject(content.testimonials);
 const stats = asObject(content.stats);
-const about = asObject(content.about);
 const contact = asObject(content.contact);
 
 function usePageMotion(loaderDone) {
@@ -264,7 +263,6 @@ function App() {
     return () => window.removeEventListener("pointermove", move);
   }, []);
 
-  const brandShort = asText(site.brandShort);
   const brandName = asText(site.brandName);
   const navItems = asArray(navigation.items);
   const navigationCta = asObject(navigation.cta);
@@ -431,7 +429,7 @@ function App() {
               <p className="eyebrow">{asText(work.eyebrow)}</p>
               <h2>{renderMarkedText(work.heading)}</h2>
             </div>
-            {/* <div className="case-grid">
+            <div className="case-grid">
               {asArray(work.items).map((project, index) => {
                 const item = asObject(project);
                 const title = asText(item.title);
@@ -461,7 +459,7 @@ function App() {
                   </article>
                 );
               })}
-            </div> */}
+            </div>
           </section>
 
           <section
