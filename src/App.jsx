@@ -17,6 +17,12 @@ const asText = (value) =>
 const asButtonVariant = (value) => (value === "primary" ? "primary" : "ghost");
 const sectionId = (value) => asText(value);
 
+const optimizeCloudinaryUrl = (url, transforms) => {
+  const src = asText(url);
+  if (!src || !src.includes("/upload/") || !transforms) return src;
+  return src.replace("/upload/", `/upload/${transforms}/`);
+};
+
 const renderMarkedText = (value) => {
   const text = asText(value);
   if (!text.includes("**")) return text;
@@ -186,14 +192,68 @@ function usePageMotion(loaderDone) {
   }, [loaderDone]);
 }
 
-function VideoSource({ src: source, type } = {}) {
-  const src = asText(source) || asText(media.heroVideo);
+function VideoSource({ src: source, type, transforms } = {}) {
+  const src = optimizeCloudinaryUrl(
+    asText(source) || asText(media.heroVideo),
+    transforms,
+  );
   if (!src) return null;
   return (
     <source
       src={src}
       type={asText(type) || asText(media.videoType) || undefined}
     />
+  );
+}
+
+function LazyVideo({
+  className,
+  src,
+  type,
+  transforms,
+  poster,
+  eager = false,
+}) {
+  const [shouldLoad, setShouldLoad] = useState(eager);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (eager || shouldLoad) return undefined;
+    const video = videoRef.current;
+    if (!video || !("IntersectionObserver" in window)) {
+      setShouldLoad(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "260px" },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [eager, shouldLoad]);
+
+  return (
+    <video
+      className={className}
+      ref={videoRef}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload={shouldLoad ? "metadata" : "none"}
+      poster={asText(poster) || undefined}
+    >
+      {shouldLoad ? (
+        <VideoSource src={src} type={type} transforms={transforms} />
+      ) : null}
+    </video>
   );
 }
 
@@ -219,7 +279,7 @@ function LoadingScreen({ done }) {
       transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
     >
       <video className="loader-video" autoPlay muted loop playsInline>
-        <VideoSource />
+        <VideoSource transforms="q_auto:good,w_1280" />
       </video>
       <div className="loader-scrim" />
       <motion.div
@@ -266,6 +326,25 @@ function App() {
   const brandName = asText(site.brandName);
   const navItems = asArray(navigation.items);
   const navigationCta = asObject(navigation.cta);
+  const contactEmail =
+    asText(
+      asArray(contact.actions)
+        .map((action) => asObject(action))
+        .find((action) => asText(action.href).startsWith("mailto:"))?.href,
+    ).replace("mailto:", "") || "info@digitalbrandsgrowth.com";
+  const handleContactSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = asText(formData.get("name")).trim();
+    const email = asText(formData.get("email")).trim();
+    const message = asText(formData.get("message")).trim();
+    const subject = encodeURIComponent(`New project enquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    );
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+  };
 
   return (
     <>
@@ -360,9 +439,7 @@ function App() {
                 <strong>{asText(asObject(hero.video).title)}</strong>
               </div>
               <div className="video-frame">
-                <video autoPlay muted loop playsInline controls>
-                  <VideoSource />
-                </video>
+                <LazyVideo eager transforms="q_auto:good,w_1280" />
               </div>
               <div className="video-caption">
                 <span>{asText(asObject(hero.video).caption)}</span>
@@ -401,9 +478,13 @@ function App() {
                         {imageUrl ? (
                           <div className="service-card-image">
                             <img
-                              src={imageUrl}
+                              src={optimizeCloudinaryUrl(
+                                imageUrl,
+                                "q_auto:good,f_auto,w_640",
+                              )}
                               alt={asText(item.imageAlt) || `${title} example`}
                               loading="lazy"
+                              decoding="async"
                             />
                           </div>
                         ) : null}
@@ -441,12 +522,12 @@ function App() {
                   >
                     {videoUrl ? (
                       <div className="case-visual">
-                        <video autoPlay muted loop playsInline>
-                          <VideoSource
-                            src={videoUrl}
-                            type={asText(item.videoType)}
-                          />
-                        </video>
+                        <LazyVideo
+                          src={videoUrl}
+                          type={asText(item.videoType)}
+                          transforms="q_auto:good,w_720"
+                          poster={asText(item.poster)}
+                        />
                       </div>
                     ) : null}
                     <div className="case-content">
@@ -501,24 +582,28 @@ function App() {
                   pathLength="1"
                 />
               </svg>
-              {asArray(processSection.items).map((step, index) => {
-                const item = asObject(step);
-                const title = asText(item.title);
-                return (
-                  <article
-                    className="roadmap-step"
-                    style={{ "--step-index": index }}
-                    key={`${title}-${index}`}
-                  >
-                    <span className="roadmap-node">{asText(item.number)}</span>
-                    <div className="roadmap-card">
-                      <p>Phase {asText(item.number)}</p>
-                      <h3>{title}</h3>
-                      <span>{asText(item.copy)}</span>
-                    </div>
-                  </article>
-                );
-              })}
+              <div className="roadmap-steps">
+                {asArray(processSection.items).map((step, index) => {
+                  const item = asObject(step);
+                  const title = asText(item.title);
+                  return (
+                    <article
+                      className="roadmap-step"
+                      style={{ "--step-index": index }}
+                      key={`${title}-${index}`}
+                    >
+                      <span className="roadmap-node">
+                        {asText(item.number)}
+                      </span>
+                      <div className="roadmap-card">
+                        <p>Phase {asText(item.number)}</p>
+                        <h3>{title}</h3>
+                        <span>{asText(item.copy)}</span>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </section>
 
@@ -564,7 +649,7 @@ function App() {
 
           {/* <section id={sectionId(about.id)} className="section about-section">
             <div className="about-video gsap-reveal">
-              <video autoPlay muted loop playsInline controls>
+              <video autoPlay muted loop playsInline>
                 <VideoSource />
               </video>
             </div>
@@ -582,22 +667,57 @@ function App() {
 
           <section id={sectionId(contact.id)} className="contact-section">
             <div className="contact-inner gsap-reveal">
-              <img
-                className="contact-logo"
-                src={asText(site.logo) || "/logo.png"}
-                alt={`${brandName || "Company"} logo`}
-              />
-              <p className="eyebrow">{asText(contact.eyebrow)}</p>
-              <h2>{renderMarkedText(contact.heading)}</h2>
-              <p>{asText(contact.copy)}</p>
-              <div className="contact-actions">
-                {asArray(contact.actions).map((action, index) => (
-                  <ActionLink
-                    action={action}
-                    key={`${asText(asObject(action).label)}-${index}`}
+              <div className="contact-copy">
+                <img
+                  className="contact-logo"
+                  src={asText(site.logo) || "/logo.png"}
+                  alt={`${brandName || "Company"} logo`}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p className="eyebrow">{asText(contact.eyebrow)}</p>
+                <h2>{renderMarkedText(contact.heading)}</h2>
+                <p>{asText(contact.copy)}</p>
+                <div className="contact-actions">
+                  {asArray(contact.actions).map((action, index) => (
+                    <ActionLink
+                      action={action}
+                      key={`${asText(asObject(action).label)}-${index}`}
+                    />
+                  ))}
+                </div>
+                <div className="contact-visual" aria-hidden="true">
+                  <img
+                    src="/dbg-logo.svg"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
                   />
-                ))}
+                </div>
               </div>
+              <form className="contact-form" onSubmit={handleContactSubmit}>
+                <label>
+                  <span>Name</span>
+                  <input name="name" type="text" autoComplete="name" required />
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                  />
+                </label>
+                <label>
+                  <span>Message</span>
+                  <textarea name="message" rows="5" required />
+                </label>
+                <button className="button button-primary" type="submit">
+                  Send Message
+                </button>
+                <p>We usually reply within 24 hours.</p>
+              </form>
             </div>
           </section>
         </main>

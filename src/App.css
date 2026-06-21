@@ -814,8 +814,9 @@ body::selection {
 
 .roadmap {
   position: relative;
-  min-height: clamp(500px, 45vw, 600px);
+  min-height: auto;
   overflow: hidden;
+  padding: clamp(28px, 4vw, 48px);
   border: 1px solid rgba(10, 124, 255, 0.16);
   border-radius: 30px;
   background:
@@ -849,12 +850,13 @@ body::selection {
 
 .roadmap-path {
   position: absolute;
-  inset: 7% 5%;
+  inset: 10% 6%;
   z-index: 1;
-  width: 90%;
-  height: 86%;
+  width: 88%;
+  height: 80%;
   overflow: visible;
   pointer-events: none;
+  opacity: 0.72;
 }
 
 .roadmap-path-base,
@@ -876,10 +878,18 @@ body::selection {
   stroke-dashoffset: 1;
 }
 
-.roadmap-step {
-  position: absolute;
+.roadmap-steps {
+  position: relative;
   z-index: 2;
-  width: min(310px, 42%);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.roadmap-step {
+  position: relative;
+  z-index: 2;
+  width: 100%;
   display: grid;
   grid-template-columns: 62px 1fr;
   gap: 14px;
@@ -887,24 +897,8 @@ body::selection {
   opacity: 0;
 }
 
-.roadmap-step:nth-of-type(1) {
-  left: 6%;
-  top: 10%;
-}
-
-.roadmap-step:nth-of-type(2) {
-  right: 5%;
-  top: 17%;
-}
-
-.roadmap-step:nth-of-type(3) {
-  left: 10%;
-  bottom: 21%;
-}
-
-.roadmap-step:nth-of-type(4) {
-  right: 4%;
-  bottom: 8%;
+.roadmap-step:nth-child(even) {
+  margin-top: clamp(28px, 4vw, 54px);
 }
 
 .roadmap-node {
@@ -928,6 +922,7 @@ body::selection {
 .roadmap-card {
   position: relative;
   overflow: hidden;
+  min-height: 180px;
   padding: 22px;
   border: 1px solid rgba(10, 124, 255, 0.14);
   border-radius: 22px;
@@ -1089,7 +1084,7 @@ svg.roadmap-path defs {
 }
 
 .about-copy p:not(.eyebrow),
-.contact-inner p:not(.eyebrow) {
+.contact-copy > p:not(.eyebrow) {
   margin: clamp(18px, 2vw, 24px) 0 0;
   max-width: 760px;
   color: var(--muted);
@@ -1127,7 +1122,9 @@ svg.roadmap-path defs {
   margin: 0 auto;
   min-height: auto;
   display: grid;
-  align-content: center;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
   padding: clamp(32px, 6vw, 72px);
   border: 1px solid rgba(10, 124, 255, 0.24);
   border-radius: 30px;
@@ -1146,6 +1143,10 @@ svg.roadmap-path defs {
   box-shadow: var(--shadow);
 }
 
+.contact-copy {
+  min-width: 0;
+}
+
 .contact-logo {
   width: clamp(58px, 6vw, 84px);
   height: clamp(58px, 6vw, 84px);
@@ -1155,6 +1156,90 @@ svg.roadmap-path defs {
   background: #ffffff;
   padding: 8px;
   box-shadow: 0 16px 42px rgba(10, 124, 255, 0.14);
+}
+
+.contact-visual {
+  width: min(360px, 100%);
+  margin-top: clamp(22px, 3vw, 34px);
+  overflow: hidden;
+  border: 1px solid rgba(10, 124, 255, 0.16);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 20px 52px rgba(22, 74, 138, 0.12);
+}
+
+.contact-visual img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: contain;
+  padding: clamp(26px, 5vw, 54px);
+  background:
+    radial-gradient(circle at 50% 46%, rgba(34, 198, 255, 0.16), transparent 54%),
+    linear-gradient(135deg, #ffffff, #eef7ff);
+}
+
+.contact-form {
+  display: grid;
+  gap: 14px;
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid rgba(10, 124, 255, 0.16);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 24px 70px rgba(22, 74, 138, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid rgba(12, 72, 132, 0.16);
+  border-radius: 16px;
+  background: rgba(247, 251, 255, 0.92);
+  color: var(--ink);
+  font: inherit;
+  padding: 14px 16px;
+  outline: none;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
+}
+
+.contact-form input {
+  min-height: 52px;
+}
+
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(10, 124, 255, 0.5);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(10, 124, 255, 0.1);
+}
+
+.contact-form .button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.contact-inner .contact-form p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .site-footer {
@@ -1218,6 +1303,14 @@ svg.roadmap-path defs {
   .testimonial-strip,
   .stats-section {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-visual {
+    max-width: 420px;
   }
 
   .stat-card:nth-child(2) {
@@ -1365,6 +1458,11 @@ svg.roadmap-path defs {
     border-radius: 24px;
   }
 
+  .roadmap-steps {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
   .roadmap::after {
     content: "";
     position: absolute;
@@ -1390,6 +1488,7 @@ svg.roadmap-path defs {
     inset: auto;
     width: 100%;
     grid-template-columns: 60px 1fr;
+    margin-top: 0;
   }
 
   .roadmap-node {
