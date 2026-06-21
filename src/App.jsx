@@ -229,10 +229,7 @@ function LoadingScreen({ done }) {
         animate={{ clipPath: "inset(0 0% 0 0)" }}
         transition={{ duration: 1.05, ease: [0.76, 0, 0.24, 1] }}
       >
-        <img
-          src={asText(site.logo) || "/logo.png"}
-          alt={`${asText(site.brandName) || "Company"} logo`}
-        />
+        {asText(loader.logo)}
       </motion.div>
       <div className="loader-progress">
         <motion.span
@@ -271,9 +268,6 @@ function App() {
   const brandName = asText(site.brandName);
   const navItems = asArray(navigation.items);
   const navigationCta = asObject(navigation.cta);
-  const heroBrandLogos = asObject(hero.brandLogos);
-  const marqueeBrandLogos = asArray(heroBrandLogos.marquee);
-  const featuredBrandLogos = asArray(heroBrandLogos.featured).slice(0, 4);
 
   return (
     <>
@@ -317,42 +311,13 @@ function App() {
           <section id={sectionId(hero.id)} className="hero-section">
             <div className="hero-bg" aria-hidden="true" />
 
-            <motion.div
-              className="video-card"
-              initial={{ opacity: 0, y: 38, scale: 0.96 }}
-              animate={loaderDone ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{
-                delay: 0.32,
-                duration: 1,
-                ease: [0.2, 0.8, 0.2, 1],
-              }}
-            >
-              {/* <div className="video-toolbar">
-                <span />
-                <span />
-                <span />
-                <strong>{asText(asObject(hero.video).title)}</strong>
-              </div> */}
-
-              <video autoPlay muted loop playsInline>
-                <VideoSource />
-              </video>
-
-              {/* Decorative images layered over the video (decorative - aria-hidden) */}
-
-              {/* <div className="video-caption">
-                <span>{asText(asObject(hero.video).caption)}</span>
-                <strong>{asText(asObject(hero.video).captionStrong)}</strong>
-              </div> */}
-            </motion.div>
-
             <div className="hero-content">
               <p className="eyebrow reveal-text">{asText(hero.eyebrow)}</p>
               <h1>
                 {asArray(hero.headlineLines).map((line, index) => (
                   <span className="line-mask" key={`${asText(line)}-${index}`}>
                     <span className="reveal-text">
-                      {renderMarkedText(line)}
+                      {asText(line).replace(/\*\*/g, "")}
                     </span>
                   </span>
                 ))}
@@ -380,52 +345,37 @@ function App() {
               </motion.div>
             </div>
 
-            {/* <div
-              className="hero-meta"
-              aria-label={asText(heroBrandLogos.marqueeLabel)}
+            <motion.div
+              className="video-card"
+              initial={{ opacity: 0, y: 38, scale: 0.96 }}
+              animate={loaderDone ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                delay: 0.32,
+                duration: 1,
+                ease: [0.2, 0.8, 0.2, 1],
+              }}
             >
-              <div className="brand-logo-marquee">
-                <div className="brand-logo-track">
-                  {[...marqueeBrandLogos, ...marqueeBrandLogos].map(
-                    (brand, index) => {
-                      const item = asObject(brand);
-                      const name = asText(item.name);
-                      const logo = asText(item.logo);
-                      if (!logo) return null;
-
-                      return (
-                        <div
-                          className="brand-logo-tile"
-                          key={`${name || "brand"}-${index}`}
-                        >
-                          <img src={logo} alt={`${name || "Brand"} logo`} />
-                        </div>
-                      );
-                    },
-                  )}
-                </div>
+              <div className="video-toolbar">
+                <span />
+                <span />
+                <span />
+                <strong>{asText(asObject(hero.video).title)}</strong>
               </div>
-
-              <div
-                className="brand-logo-static"
-                aria-label={asText(heroBrandLogos.featuredLabel)}
-              >
-                {featuredBrandLogos.map((brand, index) => {
-                  const item = asObject(brand);
-                  const name = asText(item.name);
-                  const logo = asText(item.logo);
-                  if (!logo) return null;
-
-                  return (
-                    <div
-                      className="brand-logo-tile"
-                      key={`${name || "featured-brand"}-${index}`}
-                    >
-                      <img src={logo} alt={`${name || "Brand"} logo`} />
-                    </div>
-                  );
-                })}
+              <div className="video-frame">
+                <video autoPlay muted loop playsInline controls>
+                  <VideoSource />
+                </video>
               </div>
+              <div className="video-caption">
+                <span>{asText(asObject(hero.video).caption)}</span>
+                <strong>{asText(asObject(hero.video).captionStrong)}</strong>
+              </div>
+            </motion.div>
+
+            {/* <div className="hero-meta">
+              {asArray(hero.meta).map((item, index) => (
+                <span key={`${asText(item)}-${index}`}>{asText(item)}</span>
+              ))}
             </div> */}
           </section>
 
@@ -438,37 +388,41 @@ function App() {
               <h2>{renderMarkedText(services.heading)}</h2>
             </div>
             <div className="services-grid horizontal">
-              {asArray(services.items).map((service, index) => {
-                const item = asObject(service);
-                const title = asText(item.title);
-                const imageUrl = asText(item.image);
-                return (
-                  <article
-                    className="glass-card service-card gsap-reveal"
-                    key={`${title}-${index}`}
-                  >
-                    <span>{asText(item.number)}</span>
-                    {imageUrl ? (
-                      <div className="service-card-image">
-                        <img
-                          src={imageUrl}
-                          alt={asText(item.imageAlt) || `${title} example`}
-                          loading="lazy"
-                        />
-                      </div>
-                    ) : null}
-                    <h3>{title}</h3>
-                    <p>{asText(item.copy)}</p>
-                    <ul>
-                      {asArray(item.points).map((point, pointIndex) => (
-                        <li key={`${asText(point)}-${pointIndex}`}>
-                          {asText(point)}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                );
-              })}
+              <div className="services-marquee-track">
+                {[...asArray(services.items), ...asArray(services.items)].map(
+                  (service, index) => {
+                    const item = asObject(service);
+                    const title = asText(item.title);
+                    const imageUrl = asText(item.image);
+                    return (
+                      <article
+                        className="glass-card service-card gsap-reveal"
+                        key={`${title}-${index}`}
+                      >
+                        <span>{asText(item.number)}</span>
+                        {imageUrl ? (
+                          <div className="service-card-image">
+                            <img
+                              src={imageUrl}
+                              alt={asText(item.imageAlt) || `${title} example`}
+                              loading="lazy"
+                            />
+                          </div>
+                        ) : null}
+                        <h3>{title}</h3>
+                        <p>{asText(item.copy)}</p>
+                        <ul>
+                          {asArray(item.points).map((point, pointIndex) => (
+                            <li key={`${asText(point)}-${pointIndex}`}>
+                              {asText(point)}
+                            </li>
+                          ))}
+                        </ul>
+                      </article>
+                    );
+                  },
+                )}
+              </div>
             </div>
           </section>
 
@@ -477,7 +431,7 @@ function App() {
               <p className="eyebrow">{asText(work.eyebrow)}</p>
               <h2>{renderMarkedText(work.heading)}</h2>
             </div>
-            <div className="case-grid">
+            {/* <div className="case-grid">
               {asArray(work.items).map((project, index) => {
                 const item = asObject(project);
                 const title = asText(item.title);
@@ -507,7 +461,7 @@ function App() {
                   </article>
                 );
               })}
-            </div>
+            </div> */}
           </section>
 
           <section
