@@ -1136,6 +1136,246 @@ svg.roadmap-path defs {
   text-transform: uppercase;
 }
 
+.about-subheading {
+  margin: 18px 0 0;
+  color: var(--ink);
+  font-size: clamp(1.05rem, 1.1vw, 1.25rem);
+  line-height: 1.65;
+}
+
+/* About page: give every section a shared content edge and a more deliberate rhythm. */
+.about-page main {
+  padding: clamp(86px, 9vw, 118px) 0 clamp(28px, 4vw, 54px);
+}
+
+.about-page .section {
+  width: var(--wide);
+  margin: 0 auto;
+  padding: clamp(44px, 6vw, 88px) 0;
+}
+
+.about-page .section-heading {
+  width: 100%;
+  margin: 0 0 clamp(26px, 3vw, 42px);
+}
+
+.about-page .about-hero-section {
+  min-height: min(680px, calc(100vh - 86px));
+  padding-top: clamp(18px, 3vw, 40px);
+  padding-bottom: clamp(52px, 7vw, 96px);
+}
+
+.about-copy h1 {
+  max-width: 760px;
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--fs-hero);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.about-copy h1 strong,
+.section-heading h2 strong,
+.closing-cta-card h2 strong {
+  background: var(--gradient-heading-standard);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.about-hero-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.8fr);
+  gap: clamp(28px, 5vw, 52px);
+  align-items: center;
+}
+
+.about-hero-image {
+  padding: clamp(8px, 1vw, 12px);
+  border: 1px solid rgba(10, 124, 255, 0.16);
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow);
+}
+
+.about-hero-image img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  border-radius: 22px;
+  object-fit: cover;
+}
+
+.mission-vision-grid,
+.philosophy-grid,
+.growth-chart-grid,
+.approach-grid,
+.why-grid,
+.capabilities-grid,
+.gallery-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.mission-vision-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.mission-card,
+.philosophy-card,
+.chart-card,
+.approach-card,
+.why-card,
+.capability-card,
+.gallery-card,
+.closing-cta-card {
+  padding: 24px;
+  border: 1px solid rgba(10, 124, 255, 0.14);
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: 0 16px 38px rgba(22, 74, 138, 0.07);
+}
+
+.mission-card,
+.philosophy-card,
+.approach-card,
+.why-card,
+.capability-card {
+  min-height: 100%;
+  padding: clamp(24px, 3vw, 34px);
+}
+
+.mission-card p,
+.philosophy-card p,
+.approach-card p,
+.why-card p,
+.capability-card li {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.philosophy-card h3,
+.approach-card h3,
+.why-card h3,
+.capability-card h3 {
+  margin-top: 0;
+}
+
+.mission-card strong,
+.chart-card strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+
+.philosophy-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.philosophy-card span,
+.approach-card span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(10, 124, 255, 0.08);
+  font-weight: 900;
+  color: var(--blue);
+  margin-bottom: 18px;
+}
+
+.chart-card {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chart-card span,
+.trend-label {
+  color: var(--muted);
+}
+
+.growth-trend {
+  margin-top: 24px;
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid rgba(10, 124, 255, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.trend-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.trend-point {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(10, 124, 255, 0.08);
+}
+
+.approach-grid,
+.why-grid,
+.capabilities-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.why-card h3,
+.capability-card h3 {
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.capability-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.capability-card li::before {
+  content: "•";
+  margin-right: 10px;
+  color: var(--blue);
+}
+
+.gallery-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.gallery-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: block;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.about-closing-section {
+  margin-top: 10px;
+}
+
+.closing-cta-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.closing-cta-card p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .contact-section {
   width: 100%;
   margin: 0;
@@ -1315,8 +1555,17 @@ svg.roadmap-path defs {
 
   .hero-section,
   .process-section,
-  .about-section {
+  .about-section,
+  .about-hero-section {
     grid-template-columns: 1fr;
+  }
+
+  .about-page .about-hero-section {
+    min-height: auto;
+  }
+
+  .about-hero-image {
+    width: min(620px, 100%);
   }
 
   .hero-section {
@@ -1551,6 +1800,23 @@ svg.roadmap-path defs {
   .hero-actions,
   .contact-actions {
     display: grid;
+  }
+
+  .about-page main {
+    padding-top: 90px;
+  }
+
+  .about-page .section {
+    padding-block: clamp(40px, 10vw, 64px);
+  }
+
+  .about-hero-image img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .closing-cta-card {
+    grid-template-columns: 1fr;
+    padding: 28px;
   }
 
   .site-footer {

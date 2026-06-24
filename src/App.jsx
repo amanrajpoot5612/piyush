@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -61,6 +62,7 @@ const work = asObject(content.work);
 const processSection = asObject(content.process);
 const testimonials = asObject(content.testimonials);
 const stats = asObject(content.stats);
+const about = asObject(content.about);
 const contact = asObject(content.contact);
 
 function usePageMotion(loaderDone) {
@@ -369,9 +371,17 @@ function App() {
             {navItems.map((item, index) => {
               const navItem = asObject(item);
               const label = asText(navItem.label);
+              const href = asText(navItem.href) || "#";
               if (!label) return null;
+              if (href.startsWith("/")) {
+                return (
+                  <Link key={`${label}-${index}`} to={href}>
+                    {label}
+                  </Link>
+                );
+              }
               return (
-                <a key={`${label}-${index}`} href={asText(navItem.href) || "#"}>
+                <a key={`${label}-${index}`} href={href}>
                   {label}
                 </a>
               );
@@ -646,24 +656,6 @@ function App() {
               );
             })}
           </section>
-
-          {/* <section id={sectionId(about.id)} className="section about-section">
-            <div className="about-video gsap-reveal">
-              <video autoPlay muted loop playsInline>
-                <VideoSource />
-              </video>
-            </div>
-            <div className="about-copy gsap-reveal">
-              <p className="eyebrow">{asText(about.eyebrow)}</p>
-              <h2>{asText(about.heading)}</h2>
-              <p>{asText(about.copy)}</p>
-              <div className="about-list">
-                {asArray(about.tags).map((tag, index) => (
-                  <span key={`${asText(tag)}-${index}`}>{asText(tag)}</span>
-                ))}
-              </div>
-            </div>
-          </section> */}
 
           <section id={sectionId(contact.id)} className="contact-section">
             <div className="contact-inner gsap-reveal">
