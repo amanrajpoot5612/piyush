@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -304,16 +304,32 @@ function LoadingScreen({ done }) {
 }
 
 function App() {
-  const [loaderDone, setLoaderDone] = useState(false);
+  const [loaderDone, setLoaderDone] = useState(
+    () => window.sessionStorage.getItem("dbg-loader-complete") === "true",
+  );
   const year = new Date().getFullYear();
   const cursorRef = useRef(null);
+  const location = useLocation();
 
   usePageMotion(loaderDone);
 
   useEffect(() => {
+    if (loaderDone) return undefined;
     const timer = window.setTimeout(() => setLoaderDone(true), 2000);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [loaderDone]);
+
+  useEffect(() => {
+    if (!location.hash) return undefined;
+    const frameId = window.requestAnimationFrame(() => {
+      document.querySelector(location.hash)?.scrollIntoView();
+    });
+    return () => window.cancelAnimationFrame(frameId);
+  }, [location.hash]);
+
+  useEffect(() => {
+    if (loaderDone) window.sessionStorage.setItem("dbg-loader-complete", "true");
+  }, [loaderDone]);
 
   useEffect(() => {
     const cursor = cursorRef.current;

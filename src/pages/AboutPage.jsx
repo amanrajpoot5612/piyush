@@ -41,17 +41,17 @@ export default function AboutPage() {
           <strong>{site.brandShort || site.brandName}</strong>
         </Link>
         <nav aria-label="Primary navigation">
-          <Link to="/">Home</Link>
-          <Link to="/">Services</Link>
-          <Link to="/">Portfolio</Link>
-          <Link to="/">Process</Link>
+          <Link to="/#home">Home</Link>
+          <Link to="/#services">Services</Link>
+          <Link to="/#work">Portfolio</Link>
+          <Link to="/#process">Process</Link>
           <Link to="/about">About</Link>
-          <Link to="/">Contact</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
         <div className="header-actions">
-          <a className="nav-cta" href="/#contact">
+          <Link className="nav-cta" to="/contact">
             Let’s Talk
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -235,9 +235,9 @@ export default function AboutPage() {
                 <h2>{renderMarkedText(about.closingCta.heading)}</h2>
                 <p>{about.closingCta.copy}</p>
               </div>
-              <a className="button button-primary" href={about.closingCta.action?.href || "#contact"}>
+              <Link className="button button-primary" to="/contact">
                 {about.closingCta.action?.label || "Start a Project"}
-              </a>
+              </Link>
             </div>
           </section>
         ) : null}

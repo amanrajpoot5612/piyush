@@ -17,15 +17,16 @@
   "navigation": {
     "ariaLabel": "Primary navigation",
     "items": [
+      { "label": "Home", "href": "#home" },
       { "label": "Services", "href": "#services" },
       { "label": "Portfolio", "href": "#work" },
       { "label": "Process", "href": "#process" },
       { "label": "About", "href": "/about" },
-      { "label": "Contact", "href": "#contact" }
+      { "label": "Contact", "href": "/contact" }
     ],
     "cta": {
       "label": "Let\u2019s Talk",
-      "href": "#contact"
+      "href": "/contact"
     }
   },
   "loader": {
@@ -41,7 +42,7 @@
     ],
     "subtitle": "Strategy, creativity, performance—all focused on one thing: your growth.",
     "actions": [
-      { "label": "Start a Project", "href": "#contact", "variant": "primary" },
+      { "label": "Start a Project", "href": "/contact", "variant": "primary" },
       { "label": "View Our Work", "href": "#work", "variant": "ghost" }
     ],
     "video": {
@@ -492,7 +493,7 @@
       "copy": "From strategy to execution, DBG plugs in as your full-stack growth partner.",
       "action": {
         "label": "Start a Project",
-        "href": "#contact",
+        "href": "/contact",
         "variant": "primary"
       }
     }
